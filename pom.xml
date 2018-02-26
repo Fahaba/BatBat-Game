@@ -185,6 +185,6 @@
 
 	<ciManagement>
 		<system>travis-ci</system>
-		<url>https://travis-ci.org/tonikolaba/BatBat-Game</url>
+		<url>https://travis-ci.org/Fahaba/BatBat-Game</url>
 	</ciManagement>
 </project>
