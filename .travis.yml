@@ -10,7 +10,7 @@ install: true
 
 addons:
   sonarcloud:
-    organization: "Fahaba-github"
+    organization: "fahaba-github"
     token: $SONAR_TOKEN
 
 #script:
