@@ -337,7 +337,7 @@ public class Player extends MapObject {
 					new EnergyParticle(
 						tileMap,
 						x,
-						y + cheight / 4,
+						y + (double)cheight / 4,
 						EnergyParticle.DOWN));
 			}
 		}
@@ -581,10 +581,10 @@ public class Player extends MapObject {
 		
 		// draw emote
 		if(emote == CONFUSED) {
-			g.drawImage(confused, (int)(x + xmap - cwidth / 2), (int)(y + ymap - 40), null);
+			g.drawImage(confused, (int)(x + xmap - (double)cwidth / 2), (int)(y + ymap - 40), null);
 		}
 		else if(emote == SURPRISED) {
-			g.drawImage(surprised, (int)(x + xmap - cwidth / 2), (int)(y + ymap - 40), null);
+			g.drawImage(surprised, (int)(x + xmap - (double)cwidth / 2), (int)(y + ymap - 40), null);
 		}
 		
 		// draw energy particles

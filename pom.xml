@@ -93,14 +93,6 @@
 						</goals>
 						<configuration>
 
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.github.jsimone</groupId>
-									<artifactId>webapp-runner</artifactId>
-									<version>8.5.11.3</version>
-									<destFileName>webapp-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
 							<outputDirectory>${project.build.directory}/lib</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
@@ -137,7 +129,6 @@
 					<excludes>
 						<exclude>**/META-INF/**</exclude>
 					</excludes>
-					<encoding>utf-8</encoding>
 				</configuration>
 				<executions>
 					<execution>
