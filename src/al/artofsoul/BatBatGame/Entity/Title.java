@@ -14,9 +14,9 @@ import al.artofsoul.BatBatGame.Main.GamePanel;
 
 public class Title {
 	
-	public BufferedImage image;
+	private BufferedImage image;
 	
-	public int count;
+	private int count;
 	private boolean done;
 	private boolean remove;
 	

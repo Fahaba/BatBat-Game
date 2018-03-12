@@ -16,7 +16,7 @@ import al.artofsoul.BatBatGame.TileMap.TileMap;
 
 public class Spirit extends Enemy {
 	
-	public BufferedImage[] sprites;
+	private BufferedImage[] sprites;
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Explosion> explosions;
@@ -219,7 +219,7 @@ public class Spirit extends Enemy {
 				step++;
 				dx = dy = 0;
 			}
-			
+
 		}
 		// shockwave
 		else if(steps[step] == 2) {
