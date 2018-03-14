@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -99,11 +99,6 @@ public class FireBall extends MapObject {
 		}
 		
 	}
-	
-	public void draw(Graphics2D g) {
-		super.draw(g);
-	}
-	
 }
 
 

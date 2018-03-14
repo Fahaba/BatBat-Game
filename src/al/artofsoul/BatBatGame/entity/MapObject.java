@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
 import java.awt.Rectangle;
 
@@ -137,13 +137,12 @@ public abstract class MapObject {
 		ytemp = y;
 		
 		calculateCorners(x, ydest);
+		ytemp += dy;
+
 		if(dy < 0) {
 			if(topLeft || topRight) {
 				dy = 0;
 				ytemp = currRow * tileSize + (double)cheight / 2;
-			}
-			else {
-				ytemp += dy;
 			}
 		}
 		if(dy > 0) {
@@ -152,28 +151,21 @@ public abstract class MapObject {
 				falling = false;
 				ytemp = (currRow + 1) * tileSize - (double)cheight / 2;
 			}
-			else {
-				ytemp += dy;
-			}
 		}
 		
 		calculateCorners(xdest, y);
+		xtemp += dx;
+
 		if(dx < 0) {
 			if(topLeft || bottomLeft) {
 				dx = 0;
 				xtemp = currCol * tileSize + (double)cwidth / 2;
-			}
-			else {
-				xtemp += dx;
 			}
 		}
 		if(dx > 0) {
 			if(topRight || bottomRight) {
 				dx = 0;
 				xtemp = (currCol + 1) * tileSize - (double)cwidth / 2;
-			}
-			else {
-				xtemp += dx;
 			}
 		}
 		
@@ -241,11 +233,6 @@ public abstract class MapObject {
 				null
 			);
 		}
-		// draw collision box
-		//Rectangle r = getRectangle();
-		//r.x += xmap;
-		//r.y += ymap;
-		//g.draw(r);
 	}
 	
 }

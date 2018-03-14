@@ -59,6 +59,7 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>clean install</defaultGoal>
 		<sourceDirectory>src</sourceDirectory>
 
 		<plugins>

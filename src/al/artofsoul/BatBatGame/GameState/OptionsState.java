@@ -1,6 +1,6 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
+import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 
@@ -78,7 +78,7 @@ public class OptionsState extends GameState {
 
         // other
         g.setFont(font2);
-        g.drawString("2017 © toni kolaba", 10, 232);
+        g.drawString("2017 ï¿½ toni kolaba", 10, 232);
 
     }
 

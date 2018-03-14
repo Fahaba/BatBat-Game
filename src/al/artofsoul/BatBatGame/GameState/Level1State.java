@@ -1,9 +1,9 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
-import al.artofsoul.BatBatGame.Entity.*;
-import al.artofsoul.BatBatGame.Entity.Enemies.XhelBat;
-import al.artofsoul.BatBatGame.Entity.Enemies.Zogu;
+import al.artofsoul.BatBatGame.audio.JukeBox;
+import al.artofsoul.BatBatGame.entity.*;
+import al.artofsoul.BatBatGame.entity.enemies.XhelBat;
+import al.artofsoul.BatBatGame.entity.enemies.Zogu;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 import al.artofsoul.BatBatGame.TileMap.Background;

@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Audio;
+package al.artofsoul.BatBatGame.audio;
 
 import java.util.HashMap;
 
@@ -17,9 +17,13 @@ public class JukeBox {
 	private static HashMap<String, Clip> clips;
 	private static int gap;
 	private static boolean mute = false;
-	
+
+	private JukeBox(){
+
+	}
+
 	public static void init() {
-		clips = new HashMap<String, Clip>();
+		clips = new HashMap<>();
 		gap = 0;
 	}
 	

@@ -1,10 +1,10 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
-import al.artofsoul.BatBatGame.Entity.*;
-import al.artofsoul.BatBatGame.Entity.Enemies.Ufo;
-import al.artofsoul.BatBatGame.Entity.Enemies.XhelBat;
-import al.artofsoul.BatBatGame.Entity.Enemies.Zogu;
+import al.artofsoul.BatBatGame.audio.JukeBox;
+import al.artofsoul.BatBatGame.entity.*;
+import al.artofsoul.BatBatGame.entity.enemies.Ufo;
+import al.artofsoul.BatBatGame.entity.enemies.XhelBat;
+import al.artofsoul.BatBatGame.entity.enemies.Zogu;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 import al.artofsoul.BatBatGame.TileMap.Background;
@@ -397,13 +397,13 @@ public class Level3State extends GameState {
             player.setPosition(2175, player.gety());
         }
         if (eventCount == 60) {
-            player.setEmote(Player.CONFUSED);
+            player.setEmote(Player.EMOTE_CONFUSED);
         }
-        if (eventCount == 120) player.setEmote(Player.NONE);
+        if (eventCount == 120) player.setEmote(Player.EMOTE_NONE);
         if (eventCount == 150) tileMap.setShaking(true, 10);
-        if (eventCount == 180) player.setEmote(Player.SURPRISED);
+        if (eventCount == 180) player.setEmote(Player.EMOTE_SURPRISED);
         if (eventCount == 300) {
-            player.setEmote(Player.NONE);
+            player.setEmote(Player.EMOTE_NONE);
             eventQuake = blockInput = false;
             eventCount = 0;
         }

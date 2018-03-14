@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
 import java.awt.image.BufferedImage;
 

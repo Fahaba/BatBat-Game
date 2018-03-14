@@ -1,12 +1,9 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
-import al.artofsoul.BatBatGame.Entity.*;
-import al.artofsoul.BatBatGame.Entity.BatBat.BottomLeftPiece;
-import al.artofsoul.BatBatGame.Entity.BatBat.BottomRightPiece;
-import al.artofsoul.BatBatGame.Entity.BatBat.TopLeftPiece;
-import al.artofsoul.BatBatGame.Entity.BatBat.TopRightPiece;
-import al.artofsoul.BatBatGame.Entity.Enemies.RedEnergy;
+import al.artofsoul.BatBatGame.audio.JukeBox;
+import al.artofsoul.BatBatGame.entity.*;
+import al.artofsoul.BatBatGame.entity.batbat.BallBatBossPiece;
+import al.artofsoul.BatBatGame.entity.enemies.RedEnergy;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 import al.artofsoul.BatBatGame.TileMap.Background;
@@ -31,10 +28,10 @@ public class Level4State extends GameState {
 
     private HUD hud;
 
-    private TopLeftPiece tlp;
-    private TopRightPiece trp;
-    private BottomLeftPiece blp;
-    private BottomRightPiece brp;
+    private BallBatBossPiece tlp;
+    private BallBatBossPiece trp;
+    private BallBatBossPiece blp;
+    private BallBatBossPiece brp;
     private Portal portal;
 
     private Spirit spirit;
@@ -95,10 +92,10 @@ public class Level4State extends GameState {
         portal.setPosition(160, 154);
 
         // angelspop
-        tlp = new TopLeftPiece(tileMap);
-        trp = new TopRightPiece(tileMap);
-        blp = new BottomLeftPiece(tileMap);
-        brp = new BottomRightPiece(tileMap);
+        tlp = new BallBatBossPiece(tileMap, 0, 0, 10, 10);
+        trp = new BallBatBossPiece(tileMap,10, 0, 10, 10);
+        blp = new BallBatBossPiece(tileMap, 0, 10, 10, 10);
+        brp = new BallBatBossPiece(tileMap, 10, 10, 10, 10);
         tlp.setPosition(152, 102);
         trp.setPosition(162, 102);
         blp.setPosition(152, 112);
@@ -367,7 +364,7 @@ public class Level4State extends GameState {
             trp.setVector(0.3, -0.3);
             blp.setVector(-0.3, 0.3);
             brp.setVector(0.3, 0.3);
-            player.setEmote(Player.SURPRISED);
+            player.setEmote(Player.EMOTE_SURPRISED);
         }
         if (eventCount == 240) {
             tlp.setVector(0, -5);
@@ -376,7 +373,7 @@ public class Level4State extends GameState {
             brp.setVector(0, -5);
         }
         if (eventCount == 300) {
-            player.setEmote(Player.NONE);
+            player.setEmote(Player.EMOTE_NONE);
             portal.setOpening();
         }
         if (eventCount == 360) {

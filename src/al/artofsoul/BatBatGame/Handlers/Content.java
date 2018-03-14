@@ -12,10 +12,10 @@ import javax.imageio.ImageIO;
 // spritesheets are taken from here.
 
 public class Content {
-	
+
 	public static final BufferedImage[][] ENERGYPARTICLE = load("/Sprites/Player/ENERGYPARTICLE.gif", 5, 5);
 	public static final BufferedImage[][] EXPLOSION = load("/Sprites/Enemies/ExplosionRed.gif", 30, 30);
-	
+
 	public static final BufferedImage[][] ZOGU = load("/Sprites/Enemies/ZOGU.gif", 39, 20);
 	public static final BufferedImage[][] UFO = load("/Sprites/Enemies/UFO.gif", 30, 30);
 	public static final BufferedImage[][] XHELBAT = load("/Sprites/Enemies/XHELBAT.gif", 25, 25);

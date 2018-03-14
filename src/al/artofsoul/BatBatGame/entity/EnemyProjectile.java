@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
 import java.awt.Graphics2D;
 
@@ -25,9 +25,5 @@ public abstract class EnemyProjectile extends MapObject {
 	public abstract void setHit();
 	
 	public abstract void update();
-	
-	public void draw(Graphics2D g) {
-		super.draw(g);
-	}
-	
+
 }

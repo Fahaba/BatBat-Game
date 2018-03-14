@@ -1,7 +1,7 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
-import al.artofsoul.BatBatGame.Entity.PlayerSave;
+import al.artofsoul.BatBatGame.audio.JukeBox;
+import al.artofsoul.BatBatGame.entity.PlayerSave;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 
@@ -69,7 +69,7 @@ public class MenuState extends GameState {
 			g.drawImage(head, 120, 153, null);
 		// other
 		g.setFont(font2);
-		g.drawString("2017 © toni kolaba", 10, 232);
+		g.drawString("2017 ï¿½ toni kolaba", 10, 232);
 	}
 
 	private void select() {
@@ -77,7 +77,7 @@ public class MenuState extends GameState {
 		case 0:
 			JukeBox.play("menuselect");
 			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL1STATE); /// start this level entrance											
+			gsm.setState(GameStateManager.LEVEL1STATE); /// start this level entrance
 			break;
 		case 1:
 			gsm.setState(GameStateManager.OPTIONSSTATE);

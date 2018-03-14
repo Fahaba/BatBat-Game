@@ -1,6 +1,6 @@
 package al.artofsoul.BatBatGame.GameState;
 
-import al.artofsoul.BatBatGame.Audio.JukeBox;
+import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 
 public class GameStateManager {

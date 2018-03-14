@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import al.artofsoul.BatBatGame.Entity.Enemies.RedEnergy;
+import al.artofsoul.BatBatGame.entity.enemies.RedEnergy;
 import al.artofsoul.BatBatGame.TileMap.TileMap;
 
 /**

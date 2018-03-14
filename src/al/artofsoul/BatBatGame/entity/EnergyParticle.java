@@ -1,6 +1,5 @@
-package al.artofsoul.BatBatGame.Entity;
+package al.artofsoul.BatBatGame.entity;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import al.artofsoul.BatBatGame.Handlers.Content;
@@ -18,32 +17,31 @@ public class EnergyParticle extends MapObject {
 	
 	private BufferedImage[] sprites;
 	
-	public static final int UP = 0;
-	public static final int LEFT = 1;
-	public static final int DOWN = 2;
-	public static final int RIGHT = 3;
+	public static final int DIR_UP = 0;
+	public static final int DIR_LEFT = 1;
+	public static final int DIR_DOWN = 2;
+	public static final int DIR_RIGHT = 3;
 	
 	public EnergyParticle(TileMap tm, double x, double y, int dir) {
 		super(tm);
 		this.x = x;
 		this.y = y;
 		double d1 = Math.random() * 2.5 - 1.25;
-		double d2 = -Math.random() - 0.8; 
-		if(dir == UP) {
-			dx = d1;
-			dy = d2;
-		}
-		else if(dir == LEFT) {
-			dx = d2;
-			dy = d1;
-		}
-		else if(dir == DOWN) {
-			dx = d1;
-			dy = -d2;
-		}
-		else {
-			dx = -d2;
-			dy = d1;
+		double d2 = -Math.random() - 0.8;
+
+		switch (dir) {
+            case DIR_UP:
+			    dx = d1;
+			    dy = d2;
+            case DIR_LEFT:
+			    dx = d2;
+			    dy = d1;
+            case DIR_DOWN:
+			    dx = d1;
+			    dy = -d2;
+            case DIR_RIGHT:
+			    dx = -d2;
+			    dy = d1;
 		}
 		
 		count = 0;
@@ -60,9 +58,5 @@ public class EnergyParticle extends MapObject {
 	}
 	
 	public boolean shouldRemove() { return remove; }
-	
-	public void draw(Graphics2D g) {
-		super.draw(g);
-	}
-	
+
 }
