@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import al.artofsoul.BatBatGame.Handlers.Keys;
-import al.artofsoul.BatBatGame.Main.GamePanel;
+import al.artofsoul.BatBatGame.handlers.Keys;
+import al.artofsoul.BatBatGame.main.GamePanel;
 
 /**
  * @author ArtOfSoul

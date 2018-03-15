@@ -1,7 +1,7 @@
 package al.artofsoul.BatBatGame.gamestate;
 
-import al.artofsoul.BatBatGame.TileMap.Background;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.Background;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
 

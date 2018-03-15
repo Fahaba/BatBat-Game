@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.TileMap;
+package al.artofsoul.BatBatGame.tileMap;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
-import al.artofsoul.BatBatGame.Main.GamePanel;
+import al.artofsoul.BatBatGame.main.GamePanel;
 
 /**
  * @author ArtOfSoul
@@ -38,7 +38,6 @@ public class TileMap {
 	private int height;
 	
 	// tileset
-	private BufferedImage tileset;
 	private int numTilesAcross;
 	private Tile[][] tiles;
 	
@@ -60,7 +59,8 @@ public class TileMap {
 	}
 	
 	public void loadTiles(String s) {
-		
+		BufferedImage tileset;
+
 		try {
 
 			tileset = ImageIO.read(

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -326,7 +326,6 @@ public class Player extends MapObject {
 		
 		// jumping
 		if(jumping && !falling) {
-			//sfx.get("jump").play();
 			dy = jumpStart;
 			falling = true;
 			JukeBox.play("playerjump");
@@ -405,12 +404,10 @@ public class Player extends MapObject {
 		}
 		
 		// check attack finished
-		if(currentAction == ANIM_ATTACKING ||
-			currentAction == ANIM_UPATTACKING) {
-			if(animation.hasPlayedOnce()) {
-				attacking = false;
-				upattacking = false;
-			}
+		if(currentAction == ANIM_ATTACKING || currentAction == ANIM_UPATTACKING
+                && animation.hasPlayedOnce()) {
+            attacking = false;
+            upattacking = false;
 		}
 		if(currentAction == ANIM_CHARGING) {
 			if(animation.hasPlayed(5)) {
@@ -441,31 +438,20 @@ public class Player extends MapObject {
 			Enemy e = enemies.get(i);
 			
 			// check attack
-			if(currentAction == ANIM_ATTACKING &&
-					animation.getFrame() == 3 && animation.getCount() == 0) {
-				if(e.intersects(ar)) {
-					e.hit(damage);
-				}
+			if(currentAction == ANIM_ATTACKING && animation.getFrame() == 3
+                    && animation.getCount() == 0 && e.intersects(ar)) {
+                e.hit(damage);
 			}
 			
 			// check upward attack
-			if(currentAction == ANIM_UPATTACKING &&
-					animation.getFrame() == 3 && animation.getCount() == 0) {
-				if(e.intersects(aur)) {
-					e.hit(damage);
-				}
+			if(currentAction == ANIM_UPATTACKING && animation.getFrame() == 3
+                    && animation.getCount() == 0 && e.intersects(aur)) {
+                e.hit(damage);
 			}
 			
 			// check charging attack
-			if(currentAction == ANIM_CHARGING) {
-				if(animation.getCount() == 0) {
-					if(e.intersects(cr)) {
-						e.hit(chargeDamage);
-					}
-					/*if(e.intersects(this)) {
-						e.hit(chargeDamage);
-					}*/
-				}
+			if(currentAction == ANIM_CHARGING && animation.getCount() == 0 && e.intersects(cr)) {
+			    e.hit(chargeDamage);
 			}
 			
 			// collision with enemy
@@ -480,20 +466,14 @@ public class Player extends MapObject {
 		}
 		
 		// set animation, ordered by priority
-		if(teleporting) {
-			if(currentAction != ANIM_TELEPORTING) {
-				setAnimation(ANIM_TELEPORTING);
-			}
+		if(teleporting && currentAction != ANIM_TELEPORTING) {
+            setAnimation(ANIM_TELEPORTING);
 		}
-		else if(knockback) {
-			if(currentAction != ANIM_KNOCKBACK) {
-				setAnimation(ANIM_KNOCKBACK);
-			}
+		else if(knockback && currentAction != ANIM_KNOCKBACK) {
+            setAnimation(ANIM_KNOCKBACK);
 		}
-		else if(health == 0) {
-			if(currentAction != ANIM_DEAD) {
-				setAnimation(ANIM_DEAD);
-			}
+		else if(health == 0 && currentAction != ANIM_DEAD) {
+            setAnimation(ANIM_DEAD);
 		}
 		else if(upattacking) {
 			if(currentAction != ANIM_UPATTACKING) {
@@ -543,30 +523,20 @@ public class Player extends MapObject {
 				}}
 			}
 		}
-		else if(charging) {
-			if(currentAction != ANIM_CHARGING) {
-				setAnimation(ANIM_CHARGING);
-			}
+		else if(charging && currentAction != ANIM_CHARGING) {
+            setAnimation(ANIM_CHARGING);
 		}
-		else if(dy < 0) {
-			if(currentAction != ANIM_JUMPING) {
-				setAnimation(ANIM_JUMPING);
-			}
+		else if(dy < 0 && currentAction != ANIM_JUMPING) {
+            setAnimation(ANIM_JUMPING);
 		}
-		else if(dy > 0) {
-			if(currentAction != ANIM_FALLING) {
-				setAnimation(ANIM_FALLING);
-			}
+		else if(dy > 0 && currentAction != ANIM_FALLING) {
+            setAnimation(ANIM_FALLING);
 		}
-		else if(dashing && (left || right)) {
-			if(currentAction != ANIM_DASHING) {
-				setAnimation(ANIM_DASHING);
-			}
+		else if(dashing && (left || right) && currentAction != ANIM_DASHING) {
+            setAnimation(ANIM_DASHING);
 		}
-		else if(left || right) {
-			if(currentAction != ANIM_WALKING) {
-				setAnimation(ANIM_WALKING);
-			}
+		else if(left || right && currentAction != ANIM_WALKING) {
+            setAnimation(ANIM_WALKING);
 		}
 		else if(currentAction != ANIM_IDLE) {
 			setAnimation(ANIM_IDLE);
@@ -581,7 +551,8 @@ public class Player extends MapObject {
 		}
 		
 	}
-	
+
+	@Override
 	public void draw(Graphics2D g) {
 		
 		// draw emote
@@ -598,9 +569,7 @@ public class Player extends MapObject {
 		}
 		
 		// flinch
-		if(flinching && !knockback) {
-			if(flinchCount % 10 < 5) return;
-		}
+		if(flinching && !knockback && flinchCount % 10 < 5) return;
 		
 		super.draw(g);
 		

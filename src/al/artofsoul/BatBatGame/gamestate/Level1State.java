@@ -4,9 +4,8 @@ import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
 import al.artofsoul.BatBatGame.entity.enemies.XhelBat;
 import al.artofsoul.BatBatGame.entity.enemies.Zogu;
-import al.artofsoul.BatBatGame.Handlers.Keys;
-import al.artofsoul.BatBatGame.Main.GamePanel;
-import al.artofsoul.BatBatGame.TileMap.Background;
+import al.artofsoul.BatBatGame.handlers.Keys;
+import al.artofsoul.BatBatGame.main.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;

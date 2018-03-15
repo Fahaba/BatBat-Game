@@ -1,8 +1,6 @@
 package al.artofsoul.BatBatGame.entity;
 
-import java.awt.Graphics2D;
-
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul

@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Main;
+package al.artofsoul.BatBatGame.main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import al.artofsoul.BatBatGame.gamestate.GameStateManager;
-import al.artofsoul.BatBatGame.Handlers.Keys;
+import al.artofsoul.BatBatGame.handlers.Keys;
 
 
 @SuppressWarnings("serial")
@@ -22,17 +22,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	public static final int SCALE = 2;
 	
 	// game thread
-	private Thread thread;
+	private transient Thread thread;
 	private boolean running;
-	private int FPS = 60;
-	private long targetTime = 1000 / FPS;
+	private int fps = 60;
+	private long targetTime = 1000 / fps;
 	
 	// image
-	private BufferedImage image;
-	private Graphics2D g;
+	private transient BufferedImage image;
+	private transient Graphics2D g;
 	
 	// game state manager
-	private GameStateManager gsm;
+	private transient GameStateManager gsm;
 	
 	// other
 	private boolean recording = false;
@@ -45,7 +45,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		setFocusable(true);
 		requestFocus();
 	}
-	
+
+	@Override
 	public void addNotify() {
 		super.addNotify();
 		if(thread == null) {
@@ -59,11 +60,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
-		/*g.setRenderingHint(
-			RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON
-		);*/
-		
 		
 		running = true;
 		
@@ -127,10 +123,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 			javax.imageio.ImageIO.write(image, "gif", out);
 			recordingCount++;
 		}
-		catch(Exception e) {}
+		catch(Exception e) {
+		    System.err.println("error saving screenshot");
+        }
 	}
-	
-	public void keyTyped(KeyEvent key) {}
+
+	public void keyTyped(KeyEvent key) {
+	    // not used
+    }
 	public void keyPressed(KeyEvent key) {
 		if(key.isControlDown()) {
 			if(key.getKeyCode() == KeyEvent.VK_R) {

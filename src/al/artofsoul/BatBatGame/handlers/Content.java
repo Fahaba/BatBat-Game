@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Handlers;
+package al.artofsoul.BatBatGame.handlers;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -21,6 +21,10 @@ public class Content {
 	public static final BufferedImage[][] XHELBAT = load("/Sprites/Enemies/XHELBAT.gif", 25, 25);
 	public static final BufferedImage[][] REDENERGY = load("/Sprites/Enemies/REDENERGY.gif", 20, 20);
 
+	private Content() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
 		try {
@@ -40,7 +44,7 @@ public class Content {
 			System.out.println("Error loading graphics.");
 			System.exit(0);
 		}
-		return null;
+		return new BufferedImage[0][0];
 	}
 	
 }

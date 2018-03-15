@@ -2,9 +2,9 @@ package al.artofsoul.BatBatGame.entity;
 
 import java.awt.Rectangle;
 
-import al.artofsoul.BatBatGame.Main.GamePanel;
-import al.artofsoul.BatBatGame.TileMap.Tile;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.main.GamePanel;
+import al.artofsoul.BatBatGame.tileMap.Tile;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -139,34 +139,26 @@ public abstract class MapObject {
 		calculateCorners(x, ydest);
 		ytemp += dy;
 
-		if(dy < 0) {
-			if(topLeft || topRight) {
-				dy = 0;
-				ytemp = currRow * tileSize + (double)cheight / 2;
-			}
+		if(dy < 0 && (topLeft || topRight)) {
+			dy = 0;
+			ytemp = currRow * tileSize + (double)cheight / 2;
 		}
-		if(dy > 0) {
-			if(bottomLeft || bottomRight) {
-				dy = 0;
-				falling = false;
-				ytemp = (currRow + 1) * tileSize - (double)cheight / 2;
-			}
+		if(dy > 0 && (bottomLeft || bottomRight)) {
+			dy = 0;
+			falling = false;
+			ytemp = (currRow + 1) * tileSize - (double)cheight / 2;
 		}
 		
 		calculateCorners(xdest, y);
 		xtemp += dx;
 
-		if(dx < 0) {
-			if(topLeft || bottomLeft) {
-				dx = 0;
-				xtemp = currCol * tileSize + (double)cwidth / 2;
-			}
+		if(dx < 0 && (topLeft || bottomLeft)) {
+			dx = 0;
+			xtemp = currCol * tileSize + (double)cwidth / 2;
 		}
-		if(dx > 0) {
-			if(topRight || bottomRight) {
-				dx = 0;
-				xtemp = (currCol + 1) * tileSize - (double)cwidth / 2;
-			}
+		if(dx > 0 && (topRight || bottomRight)) {
+			dx = 0;
+			xtemp = (currCol + 1) * tileSize - (double)cwidth / 2;
 		}
 		
 		if(!falling) {

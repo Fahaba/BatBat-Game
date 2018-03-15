@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Main;
+package al.artofsoul.BatBatGame.main;
 
 import javax.swing.*;
 

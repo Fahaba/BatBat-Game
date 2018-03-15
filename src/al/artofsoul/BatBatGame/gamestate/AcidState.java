@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import al.artofsoul.BatBatGame.Handlers.Keys;
-import al.artofsoul.BatBatGame.Main.GamePanel;
+import al.artofsoul.BatBatGame.handlers.Keys;
+import al.artofsoul.BatBatGame.main.GamePanel;
 
 /**
  * @author ArtOfSoul

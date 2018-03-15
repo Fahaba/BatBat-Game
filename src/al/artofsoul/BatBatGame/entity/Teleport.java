@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -43,9 +43,5 @@ public class Teleport extends MapObject {
 	public void update() {
 		animation.update();
 	}
-	
-	public void draw(Graphics2D g) {
-		super.draw(g);
-	}
-	
+
 }

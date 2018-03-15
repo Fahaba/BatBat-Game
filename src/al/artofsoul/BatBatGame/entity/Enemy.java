@@ -1,7 +1,7 @@
 package al.artofsoul.BatBatGame.entity;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -80,11 +80,11 @@ public class Enemy extends MapObject {
         }
     }
 
+    @Override
     public void draw(Graphics2D g) {
 
-        if(flinching) {
-            if(flinchCount == 0 || flinchCount == 2) return;
-        }
+        if(flinching && (flinchCount == 0 || flinchCount == 2))
+            return;
 
         super.draw(g);
 

@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -90,9 +90,4 @@ public class Portal extends MapObject {
 			animation.setDelay(2);
 		}
 	}
-	
-	public void draw(Graphics2D g) {
-		super.draw(g);
-	}
-	
 }

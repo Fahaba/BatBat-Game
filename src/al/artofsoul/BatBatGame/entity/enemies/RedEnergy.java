@@ -1,11 +1,10 @@
 package al.artofsoul.BatBatGame.entity.enemies;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import al.artofsoul.BatBatGame.entity.Enemy;
-import al.artofsoul.BatBatGame.Handlers.Content;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.handlers.Content;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -53,6 +52,7 @@ public class RedEnergy extends Enemy {
         permanent = b;
     }
 
+    @Override
     public void update() {
 
         super.update();
@@ -68,10 +68,12 @@ public class RedEnergy extends Enemy {
             case VECTOR:
                 x += dx;
                 y += dy;
+                break;
             case GRAVITY:
                 dy += 0.2;
                 x += dx;
                 y += dy;
+                break;
             case BOUNCE:
                 double dx2 = dx;
                 double dy2 = dy;
@@ -86,6 +88,9 @@ public class RedEnergy extends Enemy {
                 }
                 x += dx;
                 y += dy;
+                break;
+            default:
+                break;
         }
 
         // update animation

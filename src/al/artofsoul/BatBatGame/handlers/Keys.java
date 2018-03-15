@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.Handlers;
+package al.artofsoul.BatBatGame.handlers;
 
 import java.awt.event.KeyEvent;
 
@@ -16,7 +16,7 @@ public class Keys {
 	public static final int NUM_KEYS = 16;
 	
 	private static boolean[] keyState = new boolean[NUM_KEYS];
-	private static boolean prevKeyState[] = new boolean[NUM_KEYS];
+	private static boolean[] prevKeyState = new boolean[NUM_KEYS];
 	
 	public static final int UP = 0;
 	public static final int LEFT = 1;
@@ -28,6 +28,11 @@ public class Keys {
 	public static final int BUTTON4 = 7;
 	public static final int ENTER = 8;
 	public static final int ESCAPE = 9;
+
+
+	private Keys() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static boolean getKeyState(int key){
 	    return keyState[key];

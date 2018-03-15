@@ -1,12 +1,11 @@
 package al.artofsoul.BatBatGame.entity.batbat;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
 import al.artofsoul.BatBatGame.entity.MapObject;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul

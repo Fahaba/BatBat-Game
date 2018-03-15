@@ -3,11 +3,12 @@ package al.artofsoul.BatBatGame.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import al.artofsoul.BatBatGame.entity.enemies.RedEnergy;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -18,8 +19,8 @@ public class Spirit extends Enemy {
 	
 	private BufferedImage[] sprites;
 	private Player player;
-	private ArrayList<Enemy> enemies;
-	private ArrayList<Explosion> explosions;
+	private List<Enemy> enemies;
+	private List<Explosion> explosions;
 	
 	private boolean active;
 	private boolean finalAttack;
@@ -41,7 +42,7 @@ public class Spirit extends Enemy {
 	private RedEnergy[] shield;
 	private double ticks;
 	
-	public Spirit(TileMap tm, Player p, ArrayList<Enemy> enemies, ArrayList<Explosion> explosions) {
+	public Spirit(TileMap tm, Player p, List<Enemy> enemies, List<Explosion> explosions) {
 		
 		super(tm);
 		player = p;
@@ -83,7 +84,8 @@ public class Spirit extends Enemy {
 	}
 	
 	public void setActive() { active = true; }
-	
+
+	@Override
 	public void update() {
 		
 		if(health == 0) return;
@@ -251,11 +253,10 @@ public class Spirit extends Enemy {
 		}
 		
 	}
-	
+
+	@Override
 	public void draw(Graphics2D g) {
-		if(flinching) {
-			if(flinchCount % 4 < 2) return;
-		}
+		if(flinching && flinchCount % 4 < 2) return;
 		super.draw(g);
 	}
 

@@ -1,13 +1,12 @@
 package al.artofsoul.BatBatGame.entity.enemies;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
 import al.artofsoul.BatBatGame.entity.Enemy;
 import al.artofsoul.BatBatGame.entity.Player;
-import al.artofsoul.BatBatGame.Handlers.Content;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.handlers.Content;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -51,6 +50,7 @@ public class Ufo extends Enemy {
 		
 	}
 
+	@Override
 	public void update() {
 
         super.update();
@@ -77,6 +77,7 @@ public class Ufo extends Enemy {
                     step++;
                     attackTick = 0;
                 }
+                break;
             }
             // jump away
             case 1: {
@@ -90,6 +91,7 @@ public class Ufo extends Enemy {
                 if (falling) {
                     step++;
                 }
+                break;
             }
             // attack
             case 2: {
@@ -107,6 +109,7 @@ public class Ufo extends Enemy {
                     currentAction = JUMPING;
                     setAnim(jumpSprites, -1);
                 }
+                break;
             }
             // done attacking
             case 3: {
@@ -116,7 +119,10 @@ public class Ufo extends Enemy {
             case 4: {
                 step = 0;
                 left = right = jumping = false;
+                break;
             }
+            default:
+                break;
         }
 	}
 }

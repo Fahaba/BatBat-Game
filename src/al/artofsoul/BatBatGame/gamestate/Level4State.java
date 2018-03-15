@@ -4,8 +4,8 @@ import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
 import al.artofsoul.BatBatGame.entity.batbat.BallBatBossPiece;
 import al.artofsoul.BatBatGame.entity.enemies.RedEnergy;
-import al.artofsoul.BatBatGame.Handlers.Keys;
-import al.artofsoul.BatBatGame.Main.GamePanel;
+import al.artofsoul.BatBatGame.handlers.Keys;
+import al.artofsoul.BatBatGame.main.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -2,8 +2,8 @@ package al.artofsoul.BatBatGame.entity;
 
 import java.awt.image.BufferedImage;
 
-import al.artofsoul.BatBatGame.Handlers.Content;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
+import al.artofsoul.BatBatGame.handlers.Content;
+import al.artofsoul.BatBatGame.tileMap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -33,15 +33,21 @@ public class EnergyParticle extends MapObject {
             case DIR_UP:
 			    dx = d1;
 			    dy = d2;
+			    break;
             case DIR_LEFT:
 			    dx = d2;
 			    dy = d1;
+			    break;
             case DIR_DOWN:
 			    dx = d1;
 			    dy = -d2;
+			    break;
             case DIR_RIGHT:
 			    dx = -d2;
 			    dy = d1;
+			    break;
+            default:
+                break;
 		}
 		
 		count = 0;
