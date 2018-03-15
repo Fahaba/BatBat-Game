@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import al.artofsoul.BatBatGame.GameState.GameStateManager;
+import al.artofsoul.BatBatGame.gamestate.GameStateManager;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 
 
@@ -100,7 +100,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 			}
 			
 		}
-		
 	}
 	
 	private void update() {

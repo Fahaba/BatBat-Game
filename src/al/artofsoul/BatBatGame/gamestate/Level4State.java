@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
@@ -6,8 +6,6 @@ import al.artofsoul.BatBatGame.entity.batbat.BallBatBossPiece;
 import al.artofsoul.BatBatGame.entity.enemies.RedEnergy;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
-import al.artofsoul.BatBatGame.TileMap.Background;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,78 +16,20 @@ import java.util.ArrayList;
 
 public class Level4State extends GameState {
 
-    private Background temple;
-
-    private Player player;
-    private TileMap tileMap;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<EnergyParticle> energyParticles;
-    private ArrayList<Explosion> explosions;
-
-    private HUD hud;
-
-    private BallBatBossPiece tlp;
-    private BallBatBossPiece trp;
-    private BallBatBossPiece blp;
-    private BallBatBossPiece brp;
-    private Portal portal;
+    private BallBatBossPiece tlp; // topleftpiece
+    private BallBatBossPiece trp; // toprightpiece
+    private BallBatBossPiece blp; // bottomleft
+    private BallBatBossPiece brp; // bottomright
 
     private Spirit spirit;
 
-    // events
-    private boolean blockInput = false;
-    private int eventCount = 0;
-    private boolean eventStart;
-    private ArrayList<Rectangle> tb;
-    private boolean eventFinish;
-    private boolean eventDead;
-    private boolean eventPortal;
-    private boolean flash;
-    private boolean eventBossDead;
-
     public Level4State(GameStateManager gsm) {
-        super(gsm);
+        super(gsm, LEVEL4STATE);
         init();
     }
 
     public void init() {
-
-        // backgrounds
-        temple = new Background("/Backgrounds/temple.gif", 0.5, 0);
-
-        // tilemap
-        tileMap = new TileMap(30);
-        tileMap.loadTiles("/Tilesets/ruinstileset.gif");
-        tileMap.loadMap("/Maps/level4.map");
-        tileMap.setPosition(140, 0);
-        tileMap.setTween(1);
-
-        // player
-        player = new Player(tileMap);
-        player.setPosition(50, 190);
-        player.setHealth(PlayerSave.getHealth());
-        player.setLives(PlayerSave.getLives());
-        player.setTime(PlayerSave.getTime());
-
-        // explosions
-        explosions = new ArrayList<Explosion>();
-
-        // enemies
-        enemies = new ArrayList<Enemy>();
         populateEnemies();
-
-        // energy particle
-        energyParticles = new ArrayList<EnergyParticle>();
-
-        // init player
-        player.init(enemies, energyParticles);
-
-        // hud
-        hud = new HUD(player);
-
-        // portal
-        portal = new Portal(tileMap);
-        portal.setPosition(160, 154);
 
         // angelspop
         tlp = new BallBatBossPiece(tileMap, 0, 0, 10, 10);
@@ -103,13 +43,8 @@ public class Level4State extends GameState {
 
         // start event
         eventStart = blockInput = true;
-        tb = new ArrayList<Rectangle>();
+        tb = new ArrayList<>();
         eventStart();
-
-        // sfx
-        JukeBox.load("/SFX/teleport.mp3", "teleport");
-        JukeBox.load("/SFX/explode.mp3", "explode");
-        JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
 
         // music
         JukeBox.load("/Music/level1boss.mp3", "level1boss");

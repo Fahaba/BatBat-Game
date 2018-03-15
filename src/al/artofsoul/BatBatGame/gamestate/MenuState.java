@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.PlayerSave;

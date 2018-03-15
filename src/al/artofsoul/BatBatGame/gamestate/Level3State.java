@@ -1,175 +1,100 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
+import al.artofsoul.BatBatGame.entity.enemies.Ufo;
 import al.artofsoul.BatBatGame.entity.enemies.XhelBat;
 import al.artofsoul.BatBatGame.entity.enemies.Zogu;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 import al.artofsoul.BatBatGame.TileMap.Background;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
  * @author ArtOfSoul
  */
 
-public class Level2State extends GameState {
+public class Level3State extends GameState {
 
-    private Background perendimi;
-    private Background mountains;
-
-    private Player player;
-    private TileMap tileMap;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<EnemyProjectile> eprojectiles;
-    private ArrayList<EnergyParticle> energyParticles;
-    private ArrayList<Explosion> explosions;
-
-    private HUD hud;
-    private BufferedImage batBatStart;
-    private Title title;
-    private Title subtitle;
-    private Teleport teleport;
-
-    // events
-    private boolean blockInput = false;
-    private int eventCount = 0;
-    private boolean eventStart;
-    private ArrayList<Rectangle> tb;
-    private boolean eventFinish;
-    private boolean eventDead;
-
-    public Level2State(GameStateManager gsm) {
-        super(gsm);
+    public Level3State(GameStateManager gsm) {
+        super(gsm, LEVEL3STATE);
         init();
     }
 
     public void init() {
 
-        // backgrounds
-        perendimi = new Background("/Backgrounds/perendimi.gif", 0.5, 0);
-        mountains = new Background("/Backgrounds/mali2.gif", 0.2);
-
-        // tilemap
-        tileMap = new TileMap(30);
-        tileMap.loadTiles("/Tilesets/ruinstileset.gif");
-        tileMap.loadMap("/Maps/level2.map");
-        tileMap.setPosition(140, 0);
-        tileMap.setBounds(tileMap.getWidth() - 1 * tileMap.getTileSize(),
-                tileMap.getHeight() - 2 * tileMap.getTileSize(), 0, 0);
-        tileMap.setTween(1);
-
-        // player
-        player = new Player(tileMap);
-        player.setPosition(300, 161);
-        player.setHealth(PlayerSave.getHealth());
-        player.setLives(PlayerSave.getLives());
-        player.setTime(PlayerSave.getTime());
-
-        // enemies
-        enemies = new ArrayList<Enemy>();
-        eprojectiles = new ArrayList<EnemyProjectile>();
         populateEnemies();
-
-        // energy particle
-        energyParticles = new ArrayList<EnergyParticle>();
-
-        // init player
-        player.init(enemies, energyParticles);
-
-        // explosions
-        explosions = new ArrayList<Explosion>();
-
-        // hud
-        hud = new HUD(player);
-
-        // title and subtitle
-        try {
-            batBatStart = ImageIO.read(getClass().getResourceAsStream("/HUD/batbat.gif"));
-            title = new Title(batBatStart.getSubimage(0, 0, 178, 20));
-            title.sety(60);
-            subtitle = new Title(batBatStart.getSubimage(0, 33, 91, 13));
-            subtitle.sety(85);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // teleport
-        teleport = new Teleport(tileMap);
-        teleport.setPosition(3700, 131);
 
         // start event
         eventStart = true;
         tb = new ArrayList<Rectangle>();
         eventStart();
 
-        // sfx
-        JukeBox.load("/SFX/teleport.mp3", "teleport");
-        JukeBox.load("/SFX/explode.mp3", "explode");
-        JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
-
-
-        //music
-        JukeBox.load("/Music/level1.mp3", "level1");
-        JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
-
+        // music
+        JukeBox.load("/Music/level1v2.mp3", "level2");
+        JukeBox.loop("level2", 600, JukeBox.getFrames("level2") - 2200);
 
     }
 
     private void populateEnemies() {
         enemies.clear();
-        /*
-		 * UFO t = new UFO(tileMap, player, enemies); t.setPosition(1300, 100);
-		 * enemies.add(t); t = new UFO(tileMap, player, enemies);
-		 * t.setPosition(1330, 100); enemies.add(t); t = new UFO(tileMap,
-		 * player, enemies); t.setPosition(1360, 100); enemies.add(t);
-		 */
-
         XhelBat gp;
         Zogu g;
+        Ufo t;
 
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1300, 100);
+        gp.setPosition(750, 100);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1320, 100);
+        gp.setPosition(900, 150);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1340, 100);
+        gp.setPosition(1320, 250);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1660, 100);
+        gp.setPosition(1570, 160);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1680, 100);
+        gp.setPosition(1590, 160);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(1700, 100);
+        gp.setPosition(2600, 370);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(2177, 100);
+        gp.setPosition(2620, 370);
         enemies.add(gp);
         gp = new XhelBat(tileMap, player);
-        gp.setPosition(2960, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2980, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(3000, 100);
+        gp.setPosition(2640, 370);
         enemies.add(gp);
 
         g = new Zogu(tileMap);
-        g.setPosition(2600, 100);
+        g.setPosition(904, 130);
         enemies.add(g);
         g = new Zogu(tileMap);
-        g.setPosition(3500, 100);
+        g.setPosition(1080, 270);
         enemies.add(g);
+        g = new Zogu(tileMap);
+        g.setPosition(1200, 270);
+        enemies.add(g);
+        g = new Zogu(tileMap);
+        g.setPosition(1704, 300);
+        enemies.add(g);
+
+        t = new Ufo(tileMap, player, enemies);
+        t.setPosition(1900, 580);
+        enemies.add(t);
+        t = new Ufo(tileMap, player, enemies);
+        t.setPosition(2330, 550);
+        enemies.add(t);
+        t = new Ufo(tileMap, player, enemies);
+        t.setPosition(2400, 490);
+        enemies.add(t);
+        t = new Ufo(tileMap, player, enemies);
+        t.setPosition(2457, 430);
+        enemies.add(t);
+
     }
 
     public void update() {
@@ -177,45 +102,46 @@ public class Level2State extends GameState {
         // check keys
         handleInput();
 
+        // check if quake event should start
+        if (player.getx() > 2175 && !tileMap.isShaking()) {
+            eventQuake = blockInput = true;
+        }
+
         // check if end of level event should start
         if (teleport.contains(player)) {
             eventFinish = blockInput = true;
         }
 
-        // check if player dead event should start
-        if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
-            eventDead = blockInput = true;
-        }
-
         // play events
-        if (eventStart)
-            eventStart();
-        if (eventDead)
-            eventDead();
-        if (eventFinish)
-            eventFinish();
+        if (eventStart) eventStart();
+        if (eventDead) eventDead();
+        if (eventQuake) eventQuake();
+        if (eventFinish) eventFinish();
 
         // move title and subtitle
         if (title != null) {
             title.update();
-            if (title.shouldRemove())
-                title = null;
+            if (title.shouldRemove()) title = null;
         }
         if (subtitle != null) {
             subtitle.update();
-            if (subtitle.shouldRemove())
-                subtitle = null;
+            if (subtitle.shouldRemove()) subtitle = null;
         }
 
         // move backgrounds
-        perendimi.setPosition(tileMap.getx(), tileMap.gety());
-        mountains.setPosition(tileMap.getx(), tileMap.gety());
+        temple.setPosition(tileMap.getx(), tileMap.gety());
 
         // update player
         player.update();
+        if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
+            eventDead = blockInput = true;
+        }
 
         // update tilemap
-        tileMap.setPosition((double)GamePanel.WIDTH / 2 - player.getx(), (double)GamePanel.HEIGHT / 2 - player.gety());
+        tileMap.setPosition(
+                (double)GamePanel.WIDTH / 2 - player.getx(),
+                (double)GamePanel.HEIGHT / 2 - player.gety()
+        );
         tileMap.update();
         tileMap.fixBounds();
 
@@ -226,7 +152,8 @@ public class Level2State extends GameState {
             if (e.isDead()) {
                 enemies.remove(i);
                 i--;
-                explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
+                explosions.add(
+                        new Explosion(tileMap, e.getx(), e.gety()));
             }
         }
 
@@ -257,9 +184,7 @@ public class Level2State extends GameState {
     public void draw(Graphics2D g) {
 
         // draw background
-
-        perendimi.draw(g);
-        mountains.draw(g);
+        temple.draw(g);
 
         // draw tilemap
         tileMap.draw(g);
@@ -289,10 +214,8 @@ public class Level2State extends GameState {
         hud.draw(g);
 
         // draw title
-        if (title != null)
-            title.draw(g);
-        if (subtitle != null)
-            subtitle.draw(g);
+        if (title != null) title.draw(g);
+        if (subtitle != null) subtitle.draw(g);
 
         // draw transition boxes
         g.setColor(java.awt.Color.BLACK);
@@ -303,30 +226,27 @@ public class Level2State extends GameState {
     }
 
     public void handleInput() {
-        if (Keys.isPressed(Keys.ESCAPE))
-            gsm.setPaused(true);
-        if (blockInput || player.getHealth() == 0)
-            return;
+        if (Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
+        if (blockInput || player.getHealth() == 0) return;
         player.setUp(Keys.getKeyState(Keys.UP));
         player.setLeft(Keys.getKeyState(Keys.LEFT));
         player.setDown(Keys.getKeyState(Keys.DOWN));
         player.setRight(Keys.getKeyState(Keys.RIGHT));
         player.setJumping(Keys.getKeyState(Keys.BUTTON1));
         player.setDashing(Keys.getKeyState(Keys.BUTTON2));
-        if (Keys.isPressed(Keys.BUTTON3))
-            player.setAttacking();
-        if (Keys.isPressed(Keys.BUTTON4))
-            player.setCharging();
+        if (Keys.isPressed(Keys.BUTTON3)) player.setAttacking();
+        if (Keys.isPressed(Keys.BUTTON4)) player.setCharging();
     }
 
-    ///////////////////////////////////////////////////////
-    //////////////////// EVENTS
-    ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////////////////// EVENTS
+///////////////////////////////////////////////////////
 
     // reset level
     private void reset() {
+        player.loseLife();
         player.reset();
-        player.setPosition(300, 161);
+        player.setPosition(300, 131);
         populateEnemies();
         blockInput = true;
         eventCount = 0;
@@ -355,8 +275,7 @@ public class Level2State extends GameState {
             tb.get(2).y += 4;
             tb.get(3).x += 6;
         }
-        if (eventCount == 30)
-            title.begin();
+        if (eventCount == 30) title.begin();
         if (eventCount == 60) {
             eventStart = blockInput = false;
             eventCount = 0;
@@ -368,13 +287,11 @@ public class Level2State extends GameState {
     // player has died
     private void eventDead() {
         eventCount++;
-        if (eventCount == 1) {
-            player.setDead();
-            player.stop();
-        }
+        if (eventCount == 1) player.setDead();
         if (eventCount == 60) {
             tb.clear();
-            tb.add(new Rectangle(GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2, 0, 0));
+            tb.add(new Rectangle(
+                    GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2, 0, 0));
         } else if (eventCount > 60) {
             tb.get(0).x -= 6;
             tb.get(0).y -= 4;
@@ -387,9 +304,28 @@ public class Level2State extends GameState {
             } else {
                 eventDead = blockInput = false;
                 eventCount = 0;
-                player.loseLife();
                 reset();
             }
+        }
+    }
+
+    // earthquake
+    private void eventQuake() {
+        eventCount++;
+        if (eventCount == 1) {
+            player.stop();
+            player.setPosition(2175, player.gety());
+        }
+        if (eventCount == 60) {
+            player.setEmote(Player.EMOTE_CONFUSED);
+        }
+        if (eventCount == 120) player.setEmote(Player.EMOTE_NONE);
+        if (eventCount == 150) tileMap.setShaking(true, 10);
+        if (eventCount == 180) player.setEmote(Player.EMOTE_SURPRISED);
+        if (eventCount == 300) {
+            player.setEmote(Player.EMOTE_NONE);
+            eventQuake = blockInput = false;
+            eventCount = 0;
         }
     }
 
@@ -402,7 +338,8 @@ public class Level2State extends GameState {
             player.stop();
         } else if (eventCount == 120) {
             tb.clear();
-            tb.add(new Rectangle(GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2, 0, 0));
+            tb.add(new Rectangle(
+                    GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2, 0, 0));
         } else if (eventCount > 120) {
             tb.get(0).x -= 6;
             tb.get(0).y -= 4;
@@ -414,7 +351,7 @@ public class Level2State extends GameState {
             PlayerSave.setHealth(player.getHealth());
             PlayerSave.setLives(player.getLives());
             PlayerSave.setTime(player.getTime());
-            gsm.setState(GameStateManager.LEVEL4STATE);
+            gsm.setState(GameStateManager.LEVEL2STATE);
         }
 
     }

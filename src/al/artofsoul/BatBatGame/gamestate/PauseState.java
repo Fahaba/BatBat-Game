@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import java.awt.Color;
 import java.awt.Font;

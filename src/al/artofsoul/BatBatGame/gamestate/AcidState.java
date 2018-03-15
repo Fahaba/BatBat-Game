@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -31,10 +31,14 @@ public class AcidState extends GameState {
 			"/Sprites/Player/PlayerSprites.gif"
 			)).getSubimage(0, 0, 40, 40);
 		}
-		catch(Exception e) {}
+		catch(Exception e) {
+		    e.printStackTrace();
+        }
 	}
-	
-	public void init() {}
+
+	public void init() {
+	    // not used
+    }
 	
 	public void update() {
 		handleInput();

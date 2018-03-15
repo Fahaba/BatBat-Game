@@ -1,4 +1,4 @@
-package al.artofsoul.BatBatGame.GameState;
+package al.artofsoul.BatBatGame.gamestate;
 
 import al.artofsoul.BatBatGame.audio.JukeBox;
 import al.artofsoul.BatBatGame.entity.*;
@@ -7,11 +7,8 @@ import al.artofsoul.BatBatGame.entity.enemies.Zogu;
 import al.artofsoul.BatBatGame.Handlers.Keys;
 import al.artofsoul.BatBatGame.Main.GamePanel;
 import al.artofsoul.BatBatGame.TileMap.Background;
-import al.artofsoul.BatBatGame.TileMap.TileMap;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -20,110 +17,24 @@ import java.util.ArrayList;
 
 public class Level1State extends GameState {
 
-    private Background sky;
-    private Background clouds;
-    private Background mountains;
-
-    private Player player;
-    private TileMap tileMap;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<EnemyProjectile> eprojectiles;
-    private ArrayList<EnergyParticle> energyParticles;
-    private ArrayList<Explosion> explosions;
-
-    private HUD hud;
-    private BufferedImage batBatStart;
-    private Title title;
-    private Title subtitle;
-    private Teleport teleport;
-
-    // events
-    private boolean blockInput = false;
-    private int eventCount = 0;
-    private boolean eventStart;
-    private ArrayList<Rectangle> tb;
-    private boolean eventFinish;
-    private boolean eventDead;
 
     public Level1State(GameStateManager gsm) {
-        super(gsm);
+        super(gsm, LEVEL1STATE);
         init();
     }
 
     public void init() {
 
-        // backgrounds
-        sky = new Background("/Backgrounds/qielli.gif", 0);
-        clouds = new Background("/Backgrounds/rete.gif", 0.1);
-        mountains = new Background("/Backgrounds/mali.gif", 0.2);
-
-        // tilemap
-        tileMap = new TileMap(30);
-        tileMap.loadTiles("/Tilesets/ruinstileset.gif");
-        tileMap.loadMap("/Maps/level1.map");
-        tileMap.setPosition(0, 120);
-        tileMap.setBounds(
-                tileMap.getWidth() - 1 * tileMap.getTileSize(),
-                tileMap.getHeight() - 2 * tileMap.getTileSize(),
-                0, 0
-        );
-        tileMap.setTween(1);
-
-        // player
-        player = new Player(tileMap);
-        player.setPosition(140, 191);
-        player.setHealth(PlayerSave.getHealth());
-        player.setLives(PlayerSave.getLives());
-        player.setTime(PlayerSave.getTime());
-
-        // enemies
-        enemies = new ArrayList<Enemy>();
-        eprojectiles = new ArrayList<EnemyProjectile>();
         populateEnemies();
-
-        // energy particle
-        energyParticles = new ArrayList<EnergyParticle>();
-
-        // init player
-        player.init(enemies, energyParticles);
-
-        // explosions
-        explosions = new ArrayList<Explosion>();
-
-        // hud
-        hud = new HUD(player);
-
-        // title and subtitle
-        try {
-            batBatStart = ImageIO.read(
-                    getClass().getResourceAsStream("/HUD/batbat.gif")
-            );
-            title = new Title(batBatStart.getSubimage(0, 0, 178, 19));
-            title.sety(60);
-            subtitle = new Title(batBatStart.getSubimage(0, 20, 82, 13));
-            subtitle.sety(85);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // teleport
-        teleport = new Teleport(tileMap);
-        teleport.setPosition(3700, 131);
 
         // start event
         eventStart = true;
-        tb = new ArrayList<Rectangle>();
+        tb = new ArrayList<>();
         eventStart();
-
-        // sfx
-        JukeBox.load("/SFX/teleport.mp3", "teleport");
-        JukeBox.load("/SFX/explode.mp3", "explode");
-        JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
 
         // music
         JukeBox.load("/Music/level1.mp3", "level1");
         JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
-
     }
 
     private void populateEnemies() {
@@ -211,7 +122,7 @@ public class Level1State extends GameState {
 
         // move backgrounds
         clouds.setPosition(tileMap.getx(), tileMap.gety());
-        mountains.setPosition(tileMap.getx(), tileMap.gety());
+        mountains2.setPosition(tileMap.getx(), tileMap.gety());
 
         // update player
         player.update();
