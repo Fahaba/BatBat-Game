@@ -358,6 +358,9 @@ public class Player extends MapObject {
 	}
 	
 	private void setAnimation(int i) {
+	    if (currentAction == i && currentAction != ANIM_IDLE)
+	        return;
+
 		currentAction = i;
 		animation.setFrames(sprites.get(currentAction));
 		animation.setDelay(SPRITEDELAYS[currentAction]);
@@ -464,83 +467,84 @@ public class Player extends MapObject {
 			}
 			
 		}
-		
-		// set animation, ordered by priority
-		if(teleporting && currentAction != ANIM_TELEPORTING) {
+
+        // set animation, ordered by priority
+        if(teleporting) {
             setAnimation(ANIM_TELEPORTING);
-		}
-		else if(knockback && currentAction != ANIM_KNOCKBACK) {
+        }
+        else if(knockback) {
             setAnimation(ANIM_KNOCKBACK);
-		}
-		else if(health == 0 && currentAction != ANIM_DEAD) {
+        }
+        else if(health == 0) {
             setAnimation(ANIM_DEAD);
-		}
-		else if(upattacking) {
-			if(currentAction != ANIM_UPATTACKING) {
-				JukeBox.play("playerattack");
-				setAnimation(ANIM_UPATTACKING);
-				aur.x = (int)x - 15;
-				aur.y = (int)y - 50;
-			}
-			else {
-				if(animation.getFrame() == 4 && animation.getCount() == 0) {
-					for(int c = 0; c < 3; c++) {
-						energyParticles.add(
-							new EnergyParticle(
-								tileMap,
-								aur.x + aur.width / 2,
-								aur.y + 5,
-								EnergyParticle.DIR_UP));
-					}
-				}
-			}
-		}
-		else if(attacking) {
-			if(currentAction != ANIM_ATTACKING) {
-				JukeBox.play("playerattack");
-				setAnimation(ANIM_ATTACKING);
-				ar.y = (int)y - 6;
-				if(facingRight) ar.x = (int)x + 10;
-				else ar.x = (int)x - 40;
-			}
-			else {
-				if(animation.getFrame() == 4 && animation.getCount() == 0) {
-				for(int c = 0; c < 3; c++) {
-					if(facingRight)
-						energyParticles.add(
-							new EnergyParticle(
-								tileMap, 
-								ar.x + ar.width - 4, 
-								ar.y + ar.height / 2,
-								EnergyParticle.DIR_RIGHT));
-					else
-						energyParticles.add(
-							new EnergyParticle(
-								tileMap,
-								ar.x + 4,
-								ar.y + ar.height / 2,
-								EnergyParticle.DIR_LEFT));
-				}}
-			}
-		}
-		else if(charging && currentAction != ANIM_CHARGING) {
+        }
+        else if(upattacking) {
+            setAnimation(ANIM_UPATTACKING);
+
+            if(currentAction != ANIM_UPATTACKING) {
+                JukeBox.play("playerattack");
+                aur.x = (int)x - 15;
+                aur.y = (int)y - 50;
+            }
+            else {
+                if(animation.getFrame() == 4 && animation.getCount() == 0) {
+                    for(int c = 0; c < 3; c++) {
+                        energyParticles.add(
+                                new EnergyParticle(
+                                        tileMap,
+                                        aur.x + aur.width / 2,
+                                        aur.y + 5,
+                                        EnergyParticle.DIR_UP));
+                    }
+                }
+            }
+        }
+        else if(attacking) {
+            setAnimation(ANIM_ATTACKING);
+            if(currentAction != ANIM_ATTACKING) {
+                JukeBox.play("playerattack");
+                ar.y = (int)y - 6;
+                if(facingRight) ar.x = (int)x + 10;
+                else ar.x = (int)x - 40;
+            }
+            else {
+                if(animation.getFrame() == 4 && animation.getCount() == 0) {
+                    for(int c = 0; c < 3; c++) {
+                        if(facingRight)
+                            energyParticles.add(
+                                    new EnergyParticle(
+                                            tileMap,
+                                            ar.x + ar.width - 4,
+                                            ar.y + ar.height / 2,
+                                            EnergyParticle.DIR_RIGHT));
+                        else
+                            energyParticles.add(
+                                    new EnergyParticle(
+                                            tileMap,
+                                            ar.x + 4,
+                                            ar.y + ar.height / 2,
+                                            EnergyParticle.DIR_LEFT));
+                    }}
+            }
+        }
+        else if(charging) {
             setAnimation(ANIM_CHARGING);
-		}
-		else if(dy < 0 && currentAction != ANIM_JUMPING) {
+        }
+        else if(dy < 0) {
             setAnimation(ANIM_JUMPING);
-		}
-		else if(dy > 0 && currentAction != ANIM_FALLING) {
+        }
+        else if(dy > 0) {
             setAnimation(ANIM_FALLING);
-		}
-		else if(dashing && (left || right) && currentAction != ANIM_DASHING) {
+        }
+        else if(dashing && (left || right)) {
             setAnimation(ANIM_DASHING);
-		}
-		else if((left || right) && currentAction != ANIM_WALKING) {
+        }
+        else if(left || right) {
             setAnimation(ANIM_WALKING);
-		}
-		else if(currentAction != ANIM_IDLE) {
-			setAnimation(ANIM_IDLE);
-		}
+        }
+        else {
+            setAnimation(ANIM_IDLE);
+        }
 		
 		animation.update();
 		
