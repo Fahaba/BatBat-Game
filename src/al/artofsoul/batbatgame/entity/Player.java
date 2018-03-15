@@ -404,7 +404,7 @@ public class Player extends MapObject {
 		}
 		
 		// check attack finished
-		if(currentAction == ANIM_ATTACKING || currentAction == ANIM_UPATTACKING
+		if((currentAction == ANIM_ATTACKING || currentAction == ANIM_UPATTACKING)
                 && animation.hasPlayedOnce()) {
             attacking = false;
             upattacking = false;
@@ -535,7 +535,7 @@ public class Player extends MapObject {
 		else if(dashing && (left || right) && currentAction != ANIM_DASHING) {
             setAnimation(ANIM_DASHING);
 		}
-		else if(left || right && currentAction != ANIM_WALKING) {
+		else if((left || right) && currentAction != ANIM_WALKING) {
             setAnimation(ANIM_WALKING);
 		}
 		else if(currentAction != ANIM_IDLE) {
@@ -569,7 +569,7 @@ public class Player extends MapObject {
 		}
 		
 		// flinch
-		if(flinching && !knockback && flinchCount % 10 < 5) return;
+		if(flinching && !knockback && (flinchCount % 10 < 5)) return;
 		
 		super.draw(g);
 		

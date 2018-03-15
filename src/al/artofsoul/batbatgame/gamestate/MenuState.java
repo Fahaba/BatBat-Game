@@ -78,7 +78,7 @@ public class MenuState extends GameState {
 			JukeBox.play("menuselect");
 			PlayerSave.init();
 			gsm.setState(GameStateManager.LEVEL1STATE); /// start this level entrance
-			break;
+            break;
 		case 1:
 			gsm.setState(GameStateManager.OPTIONSSTATE);
 			break;

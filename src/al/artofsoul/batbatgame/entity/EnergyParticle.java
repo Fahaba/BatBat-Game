@@ -42,12 +42,10 @@ public class EnergyParticle extends MapObject {
 			    dx = d1;
 			    dy = -d2;
 			    break;
-            case DIR_RIGHT:
+            default:
 			    dx = -d2;
 			    dy = d1;
 			    break;
-            default:
-                break;
 		}
 		
 		count = 0;
