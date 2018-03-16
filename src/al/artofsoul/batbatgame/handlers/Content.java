@@ -42,8 +42,8 @@ public class Content {
 			return ret;
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
-			Game.logger.log("Error loading graphics.");
+			Game.LOGGER.log(e.getMessage());
+			Game.LOGGER.log("Error loading graphics.");
 			System.exit(0);
 		}
 		return new BufferedImage[0][0];

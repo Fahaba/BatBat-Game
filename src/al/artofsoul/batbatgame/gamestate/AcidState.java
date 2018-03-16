@@ -33,7 +33,7 @@ public class AcidState extends GameState {
 			)).getSubimage(0, 0, 40, 40);
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
         }
 	}
 

@@ -45,22 +45,25 @@ public class OptionsState extends GameState {
             font2 = new Font("Arial", Font.PLAIN, 9);
 
             // load sound fx
-            JukeBox.load("/SFX/menuoption.mp3", "menuoption");
-            JukeBox.load("/SFX/menuselect.mp3", "menuselect");
+            JukeBox.load("/SFX/menuoption.mp3", MENUOPTIONFX);
+            JukeBox.load("/SFX/menuselect.mp3", MENUSELECTFX);
 
         } catch (Exception e) {
-            Game.logger.log(e.getMessage());
+            Game.LOGGER.log(e.getMessage());
         }
     }
 
     public void init() {
+        // empty
     }
 
+    @Override
     public void update() {
         // check keys
         handleInput();
     }
 
+    @Override
     public void draw(Graphics2D g) {
         // draw bg
         g.drawImage(bg, 0, 0, null);
@@ -92,11 +95,13 @@ public class OptionsState extends GameState {
     private void select() {
         switch (currentChoice) {
             case 0:
-                JukeBox.play("menuselect");
+                JukeBox.play(MENUSELECTFX);
                 siLuhet();
                 break;
             case 1:
                 gsm.setState(GameStateManager.MENUSTATE);
+                break;
+            default:
                 break;
         }
     }
@@ -106,13 +111,13 @@ public class OptionsState extends GameState {
         if (Keys.isPressed(Keys.ENTER)) select();
         if (Keys.isPressed(Keys.UP)) {
             if (currentChoice > 0) {
-                JukeBox.play("menuoption", 0);
+                JukeBox.play(MENUOPTIONFX, 0);
                 currentChoice--;
             }
         }
         if (Keys.isPressed(Keys.DOWN)) {
             if (currentChoice < options.length - 1) {
-                JukeBox.play("menuoption", 0);
+                JukeBox.play(MENUOPTIONFX, 0);
                 currentChoice++;
             }
         }

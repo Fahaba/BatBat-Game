@@ -3,8 +3,8 @@ package al.artofsoul.batbatgame.gamestate;
 import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
-import al.artofsoul.batbatgame.tileMap.Background;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.Background;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.*;
 
@@ -25,6 +25,12 @@ public abstract class GameState {
     public static final int LEVEL2STATE = 1;
     public static final int LEVEL3STATE = 2;
     public static final int LEVEL4STATE = 3;
+
+    public static final String LEVEL1MUSIC = "level1";
+    public static final String LEVEL2MUSIC = "level2";
+    public static final String LEVEL1BOSSMUSIC = "level1boss";
+    public static final String MENUOPTIONFX = "menuoption";
+    public static final String MENUSELECTFX = "menuselect";
 
     protected static final int[][] LEVELTITLES = {
             {0, 0, 178, 19},
@@ -194,7 +200,7 @@ public abstract class GameState {
                         LEVELSUBTITLES[level][1], LEVELSUBTITLES[level][2], LEVELSUBTITLES[level][3]));
                 subtitle.sety(85);
             } catch (Exception e) {
-                Game.logger.log(e.getMessage());
+                Game.LOGGER.log(e.getMessage());
             }
         }
 

@@ -1,14 +1,13 @@
 package al.artofsoul.batbatgame.main;
 
 import al.artofsoul.batbatgame.handlers.MyLogger;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 
 import javax.swing.*;
 
 public class Game {
 
-    public static MyLogger logger = new MyLogger();
+    public static final MyLogger LOGGER = new MyLogger();
 
 	public static void main(String[] args) {
 

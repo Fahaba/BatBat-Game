@@ -1,7 +1,7 @@
 package al.artofsoul.batbatgame.entity;
 
 import al.artofsoul.batbatgame.audio.JukeBox;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

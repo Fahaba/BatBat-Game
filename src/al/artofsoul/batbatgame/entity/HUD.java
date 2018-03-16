@@ -31,7 +31,7 @@ public class HUD {
 			life = image.getSubimage(0, 12, 12, 11);
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 	}
 	

@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import al.artofsoul.batbatgame.entity.enemies.RedEnergy;
 import al.artofsoul.batbatgame.main.Game;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 
 /**
  * @author ArtOfSoul
@@ -68,7 +68,7 @@ public class Spirit extends Enemy {
 			}
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 		
 		damage = 1;

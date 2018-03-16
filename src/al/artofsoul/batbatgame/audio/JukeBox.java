@@ -53,7 +53,7 @@ public class JukeBox {
 			clips.put(n, clip);
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 	}
 	

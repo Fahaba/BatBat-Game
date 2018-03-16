@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 				Thread.sleep(wait);
 			}
 			catch(Exception e) {
-				Game.logger.log(e.getMessage());
+				Game.LOGGER.log(e.getMessage());
 			}
 			
 		}
@@ -116,7 +116,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 				javax.imageio.ImageIO.write(image, "gif", out);
 			}
 			catch(Exception e) {
-				Game.logger.log(e.getMessage());
+				Game.LOGGER.log(e.getMessage());
             }
 		}
 		if(!recording) return;
@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 			recordingCount++;
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
         }
 	}
 

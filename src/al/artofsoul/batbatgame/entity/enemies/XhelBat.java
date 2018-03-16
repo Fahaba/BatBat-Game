@@ -6,7 +6,7 @@ import al.artofsoul.batbatgame.entity.Enemy;
 import al.artofsoul.batbatgame.entity.Player;
 import al.artofsoul.batbatgame.handlers.Content;
 import al.artofsoul.batbatgame.main.GamePanel;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 
 /**
  * @author ArtOfSoul

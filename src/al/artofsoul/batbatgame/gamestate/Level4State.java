@@ -4,7 +4,6 @@ import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.*;
 import al.artofsoul.batbatgame.entity.batbat.BallBatBossPiece;
 import al.artofsoul.batbatgame.entity.enemies.RedEnergy;
-import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 import java.awt.*;
@@ -47,7 +46,7 @@ public class Level4State extends GameState {
         eventStart();
 
         // music
-        JukeBox.load("/Music/level1boss.mp3", "level1boss");
+        JukeBox.load("/Music/level1boss.mp3", LEVEL1BOSSMUSIC);
 
     }
 
@@ -58,6 +57,7 @@ public class Level4State extends GameState {
         enemies.add(spirit);
     }
 
+    @Override
     public void update() {
 
         super.update();
@@ -86,6 +86,7 @@ public class Level4State extends GameState {
 
     }
 
+    @Override
     public void draw(Graphics2D g) {
         // draw background
         temple.draw(g);
@@ -199,10 +200,10 @@ public class Level4State extends GameState {
         if (eventCount == 362) {
             flash = false;
             JukeBox.loop(
-                    "level1boss",
+                    LEVEL1BOSSMUSIC,
                     0,
                     60000,
-                    JukeBox.getFrames("level1boss") - 4000
+                    JukeBox.getFrames(LEVEL1BOSSMUSIC) - 4000
             );
         }
         if (eventCount == 420) {

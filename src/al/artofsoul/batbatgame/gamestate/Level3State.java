@@ -5,7 +5,6 @@ import al.artofsoul.batbatgame.entity.*;
 import al.artofsoul.batbatgame.entity.enemies.Ufo;
 import al.artofsoul.batbatgame.entity.enemies.XhelBat;
 import al.artofsoul.batbatgame.entity.enemies.Zogu;
-import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 import java.awt.*;
@@ -57,8 +56,8 @@ public class Level3State extends GameState {
         eventStart();
 
         // music
-        JukeBox.load("/Music/level1v2.mp3", "level2");
-        JukeBox.loop("level2", 600, JukeBox.getFrames("level2") - 2200);
+        JukeBox.load("/Music/level1v2.mp3", LEVEL2MUSIC);
+        JukeBox.loop(LEVEL2MUSIC, 600, JukeBox.getFrames(LEVEL2MUSIC) - 2200);
 
     }
 
@@ -87,6 +86,7 @@ public class Level3State extends GameState {
         }
     }
 
+    @Override
     public void update() {
         super.update();
         // check if quake event should start
@@ -101,6 +101,7 @@ public class Level3State extends GameState {
         temple.setPosition(tileMap.getx(), tileMap.gety());
     }
 
+    @Override
     public void draw(Graphics2D g) {
         // draw background
         temple.draw(g);

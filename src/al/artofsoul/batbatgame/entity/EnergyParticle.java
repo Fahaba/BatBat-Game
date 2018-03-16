@@ -3,7 +3,7 @@ package al.artofsoul.batbatgame.entity;
 import java.awt.image.BufferedImage;
 
 import al.artofsoul.batbatgame.handlers.Content;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 
 /**
  * @author ArtOfSoul

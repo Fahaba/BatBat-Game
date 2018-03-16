@@ -1,4 +1,4 @@
-package al.artofsoul.batbatgame.tileMap;
+package al.artofsoul.batbatgame.tilemap;
 
 import java.awt.image.BufferedImage;
 

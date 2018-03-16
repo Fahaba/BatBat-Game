@@ -3,8 +3,8 @@ package al.artofsoul.batbatgame.entity;
 import java.awt.Rectangle;
 
 import al.artofsoul.batbatgame.main.GamePanel;
-import al.artofsoul.batbatgame.tileMap.Tile;
-import al.artofsoul.batbatgame.tileMap.TileMap;
+import al.artofsoul.batbatgame.tilemap.Tile;
+import al.artofsoul.batbatgame.tilemap.TileMap;
 
 /**
  * @author ArtOfSoul

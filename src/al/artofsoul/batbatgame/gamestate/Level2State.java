@@ -4,7 +4,6 @@ import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.*;
 import al.artofsoul.batbatgame.entity.enemies.XhelBat;
 import al.artofsoul.batbatgame.entity.enemies.Zogu;
-import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 import java.awt.*;
@@ -49,8 +48,8 @@ public class Level2State extends GameState {
         eventStart();
 
         //music
-        JukeBox.load("/Music/level1.mp3", "level1");
-        JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
+        JukeBox.load("/Music/level1.mp3", LEVEL1MUSIC);
+        JukeBox.loop(LEVEL1MUSIC, 600, JukeBox.getFrames(LEVEL1MUSIC) - 2200);
 
 
     }
@@ -74,6 +73,7 @@ public class Level2State extends GameState {
         }
     }
 
+    @Override
     public void update() {
         super.update();
         // move backgrounds
@@ -84,6 +84,7 @@ public class Level2State extends GameState {
 
     }
 
+    @Override
     public void draw(Graphics2D g) {
 
         // draw background

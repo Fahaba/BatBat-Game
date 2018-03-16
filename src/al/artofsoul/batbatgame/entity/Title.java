@@ -36,7 +36,7 @@ public class Title {
 			done = false;
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 		
 	}

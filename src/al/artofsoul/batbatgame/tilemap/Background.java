@@ -1,4 +1,4 @@
-package al.artofsoul.batbatgame.tileMap;
+package al.artofsoul.batbatgame.tilemap;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -47,7 +47,7 @@ public class Background {
 			yscale = d2;
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class Background {
 			yscale = ms;
 		}
 		catch(Exception e) {
-			Game.logger.log(e.getMessage());
+			Game.LOGGER.log(e.getMessage());
 		}
 	}
 	
