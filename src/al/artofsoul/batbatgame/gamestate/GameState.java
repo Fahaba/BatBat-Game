@@ -1,5 +1,6 @@
 package al.artofsoul.batbatgame.gamestate;
 
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.tileMap.Background;
 import al.artofsoul.batbatgame.tileMap.TileMap;
 import al.artofsoul.batbatgame.audio.JukeBox;
@@ -23,13 +24,13 @@ public abstract class GameState {
     public static final int LEVEL3STATE = 2;
     public static final int LEVEL4STATE = 3;
 
-    public static final int[][] LEVELTITLES = {
+    protected static final int[][] LEVELTITLES = {
             {0, 0, 178, 19},
             {0, 0, 178, 20},
             {0, 0, 178, 20}
     };
 
-    public static final int[][] LEVELSUBTITLES = {
+    protected static final int[][] LEVELSUBTITLES = {
             {0, 20, 82, 13},
             {0, 33, 91, 13},
             {0, 33, 91, 13}
@@ -50,16 +51,16 @@ public abstract class GameState {
 	protected ArrayList<EnemyProjectile> eprojectiles;
 
     // events
-    public boolean blockInput;
-    public int eventCount = 0;
-    public boolean eventStart;
-    public ArrayList<Rectangle> tb;
-    public boolean eventFinish;
-    public boolean eventDead;
-    public boolean eventQuake;
-    public boolean eventPortal;
-    public boolean flash;
-    public boolean eventBossDead;
+    protected boolean blockInput;
+    protected int eventCount = 0;
+    protected boolean eventStart;
+    protected ArrayList<Rectangle> tb;
+    protected boolean eventFinish;
+    protected boolean eventDead;
+    protected boolean eventQuake;
+    protected boolean eventPortal;
+    protected boolean flash;
+    protected boolean eventBossDead;
 
     // backgrounds
     protected Background sky = new Background("/Backgrounds/qielli.gif", 0);
@@ -189,7 +190,7 @@ public abstract class GameState {
                         LEVELSUBTITLES[level][1], LEVELSUBTITLES[level][2], LEVELSUBTITLES[level][3]));
                 subtitle.sety(85);
             } catch (Exception e) {
-                e.printStackTrace();
+                Game.logger.log(e.getMessage());
             }
         }
 

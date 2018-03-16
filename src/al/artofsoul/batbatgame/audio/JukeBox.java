@@ -1,5 +1,7 @@
 package al.artofsoul.batbatgame.audio;
 
+import al.artofsoul.batbatgame.main.Game;
+
 import java.util.HashMap;
 
 import javax.sound.sampled.AudioFormat;
@@ -51,7 +53,7 @@ public class JukeBox {
 			clips.put(n, clip);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 	

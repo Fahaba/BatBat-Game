@@ -1,5 +1,7 @@
 package al.artofsoul.batbatgame.handlers;
 
+import al.artofsoul.batbatgame.main.Game;
+
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -40,8 +42,8 @@ public class Content {
 			return ret;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Error loading graphics.");
+			Game.logger.log(e.getMessage());
+			Game.logger.log("Error loading graphics.");
 			System.exit(0);
 		}
 		return new BufferedImage[0][0];

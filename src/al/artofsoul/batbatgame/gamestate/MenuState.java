@@ -3,6 +3,7 @@ package al.artofsoul.batbatgame.gamestate;
 import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.PlayerSave;
 import al.artofsoul.batbatgame.handlers.Keys;
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -40,7 +41,7 @@ public class MenuState extends GameState {
 			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
 			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 

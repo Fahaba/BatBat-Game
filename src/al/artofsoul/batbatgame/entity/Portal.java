@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.tileMap.TileMap;
 
 /**
@@ -55,7 +56,7 @@ public class Portal extends MapObject {
 			
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 		
 	}

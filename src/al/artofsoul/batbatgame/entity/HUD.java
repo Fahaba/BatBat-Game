@@ -1,5 +1,7 @@
 package al.artofsoul.batbatgame.entity;
 
+import al.artofsoul.batbatgame.main.Game;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -29,7 +31,7 @@ public class HUD {
 			life = image.getSubimage(0, 12, 12, 11);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 	

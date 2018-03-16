@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 /**
@@ -46,7 +47,7 @@ public class Background {
 			yscale = d2;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class Background {
 			yscale = ms;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 	

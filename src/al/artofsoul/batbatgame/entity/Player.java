@@ -9,6 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import al.artofsoul.batbatgame.audio.JukeBox;
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.tileMap.TileMap;
 
 /**
@@ -157,7 +158,7 @@ public class Player extends MapObject {
 			
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+            Game.logger.log(e.getMessage());
 		}
 		
 		energyParticles = new ArrayList<>();

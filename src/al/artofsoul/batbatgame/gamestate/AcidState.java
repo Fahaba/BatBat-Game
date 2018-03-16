@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import al.artofsoul.batbatgame.handlers.Keys;
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 /**
@@ -32,7 +33,7 @@ public class AcidState extends GameState {
 			)).getSubimage(0, 0, 40, 40);
 		}
 		catch(Exception e) {
-		    e.printStackTrace();
+			Game.logger.log(e.getMessage());
         }
 	}
 

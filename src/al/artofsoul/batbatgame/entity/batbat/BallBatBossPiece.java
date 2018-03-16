@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import al.artofsoul.batbatgame.entity.MapObject;
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.tileMap.TileMap;
 
 /**
@@ -28,7 +29,7 @@ public class BallBatBossPiece extends MapObject {
             animation.setFrames(sprites);
             animation.setDelay(-1);
         } catch (Exception e) {
-            e.printStackTrace();
+            Game.logger.log(e.getMessage());
         }
     }
 

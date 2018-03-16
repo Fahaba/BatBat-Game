@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.tileMap.TileMap;
 
 /**
@@ -35,7 +36,7 @@ public class Teleport extends MapObject {
 			animation.setDelay(1);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			Game.logger.log(e.getMessage());
 		}
 	}
 	
