@@ -92,6 +92,7 @@ public class MenuState extends GameState {
 
 	}
 
+	@Override
 	public void handleInput() {
 		if (Keys.isPressed(Keys.ENTER))
 			select();

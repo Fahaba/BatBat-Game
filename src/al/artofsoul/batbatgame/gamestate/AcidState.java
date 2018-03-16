@@ -40,7 +40,8 @@ public class AcidState extends GameState {
 	public void init() {
 	    // not used
     }
-	
+
+    @Override
 	public void update() {
 		handleInput();
 		color = Color.getHSBColor(hue, 1f, 1f);
@@ -57,7 +58,8 @@ public class AcidState extends GameState {
 		at.rotate(angle);
 		g.drawImage(image, at, null);
 	}
-	
+
+	@Override
 	public void handleInput() {
 		if(Keys.isPressed(Keys.ESCAPE)) gsm.setState(GameStateManager.MENUSTATE);
 	}

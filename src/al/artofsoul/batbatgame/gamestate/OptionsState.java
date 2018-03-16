@@ -101,6 +101,7 @@ public class OptionsState extends GameState {
         }
     }
 
+    @Override
     public void handleInput() {
         if (Keys.isPressed(Keys.ENTER)) select();
         if (Keys.isPressed(Keys.UP)) {

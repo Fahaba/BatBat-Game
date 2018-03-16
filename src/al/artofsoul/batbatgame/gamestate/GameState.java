@@ -1,5 +1,6 @@
 package al.artofsoul.batbatgame.gamestate;
 
+import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
 import al.artofsoul.batbatgame.tileMap.Background;
@@ -354,8 +355,61 @@ public abstract class GameState {
 
     }
 
-	public abstract void draw(Graphics2D g);
-	public abstract void handleInput();
+	public void draw(Graphics2D g) {
+
+        // draw tilemap
+        tileMap.draw(g);
+
+        // draw enemies
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).draw(g);
+        }
+
+        if (level != LEVEL4STATE) {
+            // draw enemy projectiles
+            for (int i = 0; i < eprojectiles.size(); i++) {
+                eprojectiles.get(i).draw(g);
+            }
+        }
+        // draw explosions
+        for (int i = 0; i < explosions.size(); i++) {
+            explosions.get(i).draw(g);
+        }
+
+        // draw player
+        player.draw(g);
+
+        // draw teleport
+        if (teleport != null)
+            teleport.draw(g);
+
+        // draw hud
+        hud.draw(g);
+
+        // draw title
+        if (title != null) title.draw(g);
+        if (subtitle != null) subtitle.draw(g);
+
+        // draw transition boxes
+        g.setColor(java.awt.Color.BLACK);
+        for (int i = 0; i < tb.size(); i++) {
+            g.fill(tb.get(i));
+        }
+
+    }
+
+    public void handleInput() {
+        if (Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
+        if (blockInput || player.getHealth() == 0) return;
+        player.setUp(Keys.getKeyState(Keys.UP));
+        player.setLeft(Keys.getKeyState(Keys.LEFT));
+        player.setDown(Keys.getKeyState(Keys.DOWN));
+        player.setRight(Keys.getKeyState(Keys.RIGHT));
+        player.setJumping(Keys.getKeyState(Keys.BUTTON1));
+        player.setDashing(Keys.getKeyState(Keys.BUTTON2));
+        if (Keys.isPressed(Keys.BUTTON3)) player.setAttacking();
+        if (Keys.isPressed(Keys.BUTTON4)) player.setCharging();
+    }
 
 
 }

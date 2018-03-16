@@ -87,25 +87,15 @@ public class Level4State extends GameState {
     }
 
     public void draw(Graphics2D g) {
-
         // draw background
         temple.draw(g);
 
-        // draw tilemap
-        tileMap.draw(g);
+        super.draw(g);
 
         // draw portal
         portal.draw(g);
 
-        // draw enemies
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).draw(g);
-        }
 
-        // draw explosions
-        for (int i = 0; i < explosions.size(); i++) {
-            explosions.get(i).draw(g);
-        }
 
         // draw angelspop
         tlp.draw(g);
@@ -113,37 +103,12 @@ public class Level4State extends GameState {
         blp.draw(g);
         brp.draw(g);
 
-        // draw player
-        player.draw(g);
-
-        // draw hud
-        hud.draw(g);
-
-        // draw transition boxes
-        g.setColor(java.awt.Color.BLACK);
-        for (int i = 0; i < tb.size(); i++) {
-            g.fill(tb.get(i));
-        }
-
         // flash
         if (flash) {
             g.setColor(java.awt.Color.WHITE);
             g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
         }
 
-    }
-
-    public void handleInput() {
-        if (Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
-        if (blockInput || player.getHealth() == 0) return;
-        player.setUp(Keys.getKeyState(Keys.UP));
-        player.setLeft(Keys.getKeyState(Keys.LEFT));
-        player.setDown(Keys.getKeyState(Keys.DOWN));
-        player.setRight(Keys.getKeyState(Keys.RIGHT));
-        player.setJumping(Keys.getKeyState(Keys.BUTTON1));
-        player.setDashing(Keys.getKeyState(Keys.BUTTON2));
-        if (Keys.isPressed(Keys.BUTTON3)) player.setAttacking();
-        if (Keys.isPressed(Keys.BUTTON4)) player.setCharging();
     }
 
 ///////////////////////////////////////////////////////

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Level3State extends GameState {
 
-    private int[][] XelBatPos = {
+    private int[][] xelBatPos = {
             {750, 100},
             {900, 150},
             {1320, 250},
@@ -28,14 +28,14 @@ public class Level3State extends GameState {
             {2640, 370}
     };
 
-    private int[][] ZoguPos = {
+    private int[][] zoguPos = {
             {904, 130},
             {1080, 270},
             {1200, 270},
             {1704, 300}
     };
 
-    private int[][] UfoPos = {
+    private int[][] ufoPos = {
             {1900, 580},
             {2330, 550},
             {2400, 490},
@@ -68,21 +68,21 @@ public class Level3State extends GameState {
         Zogu g;
         Ufo t;
 
-        for (int i = 0; i < XelBatPos.length; i++) {
+        for (int i = 0; i < xelBatPos.length; i++) {
             gp = new XhelBat(tileMap, player);
-            gp.setPosition(XelBatPos[i][0], XelBatPos[i][1]);
+            gp.setPosition(xelBatPos[i][0], xelBatPos[i][1]);
             enemies.add(gp);
         }
 
-        for (int i = 0; i < ZoguPos.length; i++) {
+        for (int i = 0; i < zoguPos.length; i++) {
             g = new Zogu(tileMap);
-            g.setPosition(ZoguPos[i][0], ZoguPos[i][1]);
+            g.setPosition(zoguPos[i][0], zoguPos[i][1]);
             enemies.add(g);
         }
 
-        for (int i = 0; i < UfoPos.length; i++) {
+        for (int i = 0; i < ufoPos.length; i++) {
             t = new Ufo(tileMap, player, enemies);
-            t.setPosition(UfoPos[i][0], UfoPos[i][1]);
+            t.setPosition(ufoPos[i][0], ufoPos[i][1]);
             enemies.add(t);
         }
     }
@@ -102,60 +102,11 @@ public class Level3State extends GameState {
     }
 
     public void draw(Graphics2D g) {
-
         // draw background
         temple.draw(g);
 
-        // draw tilemap
-        tileMap.draw(g);
+        super.draw(g);
 
-        // draw enemies
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).draw(g);
-        }
-
-        // draw enemy projectiles
-        for (int i = 0; i < eprojectiles.size(); i++) {
-            eprojectiles.get(i).draw(g);
-        }
-
-        // draw explosions
-        for (int i = 0; i < explosions.size(); i++) {
-            explosions.get(i).draw(g);
-        }
-
-        // draw player
-        player.draw(g);
-
-        // draw teleport
-        teleport.draw(g);
-
-        // draw hud
-        hud.draw(g);
-
-        // draw title
-        if (title != null) title.draw(g);
-        if (subtitle != null) subtitle.draw(g);
-
-        // draw transition boxes
-        g.setColor(java.awt.Color.BLACK);
-        for (int i = 0; i < tb.size(); i++) {
-            g.fill(tb.get(i));
-        }
-
-    }
-
-    public void handleInput() {
-        if (Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
-        if (blockInput || player.getHealth() == 0) return;
-        player.setUp(Keys.getKeyState(Keys.UP));
-        player.setLeft(Keys.getKeyState(Keys.LEFT));
-        player.setDown(Keys.getKeyState(Keys.DOWN));
-        player.setRight(Keys.getKeyState(Keys.RIGHT));
-        player.setJumping(Keys.getKeyState(Keys.BUTTON1));
-        player.setDashing(Keys.getKeyState(Keys.BUTTON2));
-        if (Keys.isPressed(Keys.BUTTON3)) player.setAttacking();
-        if (Keys.isPressed(Keys.BUTTON4)) player.setCharging();
     }
 
 ///////////////////////////////////////////////////////
