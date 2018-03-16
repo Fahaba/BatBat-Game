@@ -17,6 +17,31 @@ import java.util.ArrayList;
 
 public class Level3State extends GameState {
 
+    private int[][] XelBatPos = {
+            {750, 100},
+            {900, 150},
+            {1320, 250},
+            {1570, 160},
+            {1590, 160},
+            {2600, 370},
+            {2620, 370},
+            {2640, 370}
+    };
+
+    private int[][] ZoguPos = {
+            {904, 130},
+            {1080, 270},
+            {1200, 270},
+            {1704, 300}
+    };
+
+    private int[][] UfoPos = {
+            {1900, 580},
+            {2330, 550},
+            {2400, 490},
+            {2457, 430}
+    };
+
     public Level3State(GameStateManager gsm) {
         super(gsm, LEVEL3STATE);
         init();
@@ -43,57 +68,23 @@ public class Level3State extends GameState {
         Zogu g;
         Ufo t;
 
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(750, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(900, 150);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1320, 250);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1570, 160);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1590, 160);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2600, 370);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2620, 370);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2640, 370);
-        enemies.add(gp);
+        for (int i = 0; i < XelBatPos.length; i++) {
+            gp = new XhelBat(tileMap, player);
+            gp.setPosition(XelBatPos[i][0], XelBatPos[i][1]);
+            enemies.add(gp);
+        }
 
-        g = new Zogu(tileMap);
-        g.setPosition(904, 130);
-        enemies.add(g);
-        g = new Zogu(tileMap);
-        g.setPosition(1080, 270);
-        enemies.add(g);
-        g = new Zogu(tileMap);
-        g.setPosition(1200, 270);
-        enemies.add(g);
-        g = new Zogu(tileMap);
-        g.setPosition(1704, 300);
-        enemies.add(g);
+        for (int i = 0; i < ZoguPos.length; i++) {
+            g = new Zogu(tileMap);
+            g.setPosition(ZoguPos[i][0], ZoguPos[i][1]);
+            enemies.add(g);
+        }
 
-        t = new Ufo(tileMap, player, enemies);
-        t.setPosition(1900, 580);
-        enemies.add(t);
-        t = new Ufo(tileMap, player, enemies);
-        t.setPosition(2330, 550);
-        enemies.add(t);
-        t = new Ufo(tileMap, player, enemies);
-        t.setPosition(2400, 490);
-        enemies.add(t);
-        t = new Ufo(tileMap, player, enemies);
-        t.setPosition(2457, 430);
-        enemies.add(t);
-
+        for (int i = 0; i < UfoPos.length; i++) {
+            t = new Ufo(tileMap, player, enemies);
+            t.setPosition(UfoPos[i][0], UfoPos[i][1]);
+            enemies.add(t);
+        }
     }
 
     public void update() {

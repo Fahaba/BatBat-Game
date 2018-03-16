@@ -16,6 +16,24 @@ import java.util.ArrayList;
 
 public class Level2State extends GameState {
 
+    private int[][] XelBatPos = {
+            {1300, 100},
+            {1320, 100},
+            {1340, 100},
+            {1660, 100},
+            {1680, 100},
+            {1700, 100},
+            {2177, 100},
+            {2960, 100},
+            {2980, 100},
+            {3000, 100}
+    };
+
+    private int[][] ZoguPos = {
+            {2600, 100},
+            {3500, 100}
+    };
+
     public Level2State(GameStateManager gsm) {
         super(gsm, LEVEL2STATE);
         init();
@@ -43,43 +61,17 @@ public class Level2State extends GameState {
         XhelBat gp;
         Zogu g;
 
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1300, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1320, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1340, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1660, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1680, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(1700, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2177, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2960, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(2980, 100);
-        enemies.add(gp);
-        gp = new XhelBat(tileMap, player);
-        gp.setPosition(3000, 100);
-        enemies.add(gp);
+        for (int i = 0; i < XelBatPos.length; i++) {
+            gp = new XhelBat(tileMap, player);
+            gp.setPosition(XelBatPos[i][0], XelBatPos[i][1]);
+            enemies.add(gp);
+        }
 
-        g = new Zogu(tileMap);
-        g.setPosition(2600, 100);
-        enemies.add(g);
-        g = new Zogu(tileMap);
-        g.setPosition(3500, 100);
-        enemies.add(g);
+        for (int i = 0; i < ZoguPos.length; i++) {
+            g = new Zogu(tileMap);
+            g.setPosition(ZoguPos[i][0], ZoguPos[i][1]);
+            enemies.add(g);
+        }
     }
 
     public void update() {
