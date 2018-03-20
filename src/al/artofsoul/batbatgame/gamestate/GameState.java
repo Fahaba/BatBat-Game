@@ -1,5 +1,8 @@
 package al.artofsoul.batbatgame.gamestate;
 
+import al.artofsoul.batbatgame.entity.enemies.Ufo;
+import al.artofsoul.batbatgame.entity.enemies.XhelBat;
+import al.artofsoul.batbatgame.entity.enemies.Zogu;
 import al.artofsoul.batbatgame.handlers.Keys;
 import al.artofsoul.batbatgame.main.Game;
 import al.artofsoul.batbatgame.main.GamePanel;
@@ -445,5 +448,28 @@ public abstract class GameState {
         if (Keys.isPressed(Keys.BUTTON4)) player.setCharging();
     }
 
+    public void populateCommonEnemies(int[][] xelBatPos, int[][] zoguPos, int[][] ufoPos) {
+        enemies.clear();
+        XhelBat gp;
+        Zogu g;
+        Ufo t;
 
+        for (int i = 0; i < xelBatPos.length; i++) {
+            gp = new XhelBat(tileMap, player);
+            gp.setPosition(xelBatPos[i][0], xelBatPos[i][1]);
+            enemies.add(gp);
+        }
+
+        for (int i = 0; i < zoguPos.length; i++) {
+            g = new Zogu(tileMap);
+            g.setPosition(zoguPos[i][0], zoguPos[i][1]);
+            enemies.add(g);
+        }
+
+        for (int i = 0; i < ufoPos.length; i++) {
+            t = new Ufo(tileMap, player, enemies);
+            t.setPosition(ufoPos[i][0], ufoPos[i][1]);
+            enemies.add(t);
+        }
+    }
 }

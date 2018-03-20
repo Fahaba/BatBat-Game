@@ -33,6 +33,10 @@ public class Level1State extends GameState {
             {3500, 100}
     };
 
+    private int[][] ufoPos = {
+        // not used
+    };
+
     public Level1State(GameStateManager gsm) {
         super(gsm, LEVEL1STATE);
         init();
@@ -53,22 +57,7 @@ public class Level1State extends GameState {
     }
 
     private void populateEnemies() {
-        enemies.clear();
-
-        XhelBat gp;
-        Zogu g;
-
-        for (int i = 0; i < xelBatPos.length; i++) {
-            gp = new XhelBat(tileMap, player);
-            gp.setPosition(xelBatPos[i][0], xelBatPos[i][1]);
-            enemies.add(gp);
-        }
-
-        for (int i = 0; i < zoguPos.length; i++) {
-            g = new Zogu(tileMap);
-            g.setPosition(zoguPos[i][0], zoguPos[i][1]);
-            enemies.add(g);
-        }
+        populateCommonEnemies(xelBatPos, zoguPos, ufoPos);
     }
 
     @Override
