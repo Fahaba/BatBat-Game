@@ -241,6 +241,22 @@ public abstract class GameState {
         JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
 
     }
+
+    public void reset(int x, int y) {
+        player.loseLife();
+        player.reset();
+        player.setPosition(x, y);
+        blockInput = true;
+        eventCount = 0;
+        tileMap.setShaking(false, 0);
+        eventStart = true;
+        eventStart();
+        title = new Title(batBatStart.getSubimage(0, 0, 178, 20));
+        title.sety(60);
+        subtitle = new Title(batBatStart.getSubimage(0, 33, 91, 13));
+        subtitle.sety(85);
+    }
+
 	public void update() {
         // check keys
         handleInput();

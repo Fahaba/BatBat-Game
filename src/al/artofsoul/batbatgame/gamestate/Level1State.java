@@ -119,17 +119,7 @@ public class Level1State extends GameState {
 
     // reset level
     private void reset() {
-        player.reset();
-        player.setPosition(140, 191);
+        super.reset(140, 191);
         populateEnemies();
-        blockInput = true;
-        eventCount = 0;
-        tileMap.setShaking(false, 0);
-        eventStart = true;
-        eventStart();
-        title = new Title(batBatStart.getSubimage(0, 0, 178, 20));
-        title.sety(60);
-        subtitle = new Title(batBatStart.getSubimage(0, 33, 91, 13));
-        subtitle.sety(85);
     }
 }

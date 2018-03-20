@@ -91,18 +91,7 @@ public class Level2State extends GameState {
 
     // reset level
     private void reset() {
-        player.reset();
-        player.setPosition(300, 161);
-        populateEnemies();
-        blockInput = true;
-        eventCount = 0;
-        tileMap.setShaking(false, 0);
-        eventStart = true;
-        eventStart();
-        title = new Title(batBatStart.getSubimage(0, 0, 178, 20));
-        title.sety(60);
-        subtitle = new Title(batBatStart.getSubimage(0, 33, 91, 13));
-        subtitle.sety(85);
+        super.reset(300, 161);
     }
 
     // player has died
