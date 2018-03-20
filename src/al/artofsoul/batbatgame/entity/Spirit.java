@@ -85,173 +85,198 @@ public class Spirit extends Enemy {
 	
 	public void setActive() { active = true; }
 
+	private void restartAttackPattern() {
+        // restart attack pattern
+        if(step == steps.length) {
+            step = 0;
+        }
+
+        ticks++;
+
+        if(flinching) {
+            flinchCount++;
+            if(flinchCount == 8) flinching = false;
+        }
+
+        x += dx;
+        y += dy;
+
+        animation.update();
+
+        if(!active) return;
+    }
+
+    private void handleSpecial() {
+        if(health <= maxHealth / 2) {
+            if(shield[0] == null) {
+                shield[0] = new RedEnergy(tileMap);
+                shield[0].setPermanent(true);
+                enemies.add(shield[0]);
+            }
+            if(shield[1] == null) {
+                shield[1] = new RedEnergy(tileMap);
+                shield[0].setPermanent(true);
+                enemies.add(shield[1]);
+            }
+            double pos = ticks / 32;
+            shield[0].setPosition(x + 30 * Math.sin(pos), y + 30 * Math.cos(pos));
+            pos += 3.1415;
+            shield[1].setPosition(x + 30 * Math.sin(pos), y + 30 * Math.cos(pos));
+        }
+
+        if(!finalAttack && health <= maxHealth / 4) {
+            stepCount = 0;
+            finalAttack = true;
+        }
+
+        if(finalAttack) {
+            stepCount++;
+            if(stepCount == 1) {
+                explosions.add(new Explosion(tileMap, (int)x, (int)y));
+                x = -9000;
+                y = 9000;
+                dx = dy = 0;
+            }
+            if(stepCount == 60) {
+                x = (double)tileMap.getWidth() / 2;
+                y = (double)tileMap.getHeight() / 2;
+                explosions.add(new Explosion(tileMap, (int)x, (int)y));
+            }
+            if(stepCount >= 90 && stepCount % 30 == 0) {
+                RedEnergy de = new RedEnergy(tileMap);
+                de.setPosition(x, y);
+                de.setVector(3 * Math.sin((double)stepCount / 32), 3 * Math.cos((double)stepCount / 32));
+                de.setType(RedEnergy.BOUNCE);
+                enemies.add(de);
+            }
+            return;
+        }
+    }
+
+    private void handleFlyBombing() {
+        stepCount++;
+        if(y > 60) {
+            dy = -4;
+        }
+        if(y < 60) {
+            dy = 0;
+            y = 60;
+            dx = -1;
+        }
+        if(y == 60) {
+            if(dx == -1 && x < 60) {
+                dx = 1;
+            }
+            if(dx == 1 && x > tileMap.getWidth() - 60) {
+                dx = -1;
+            }
+        }
+        if(stepCount % 60 == 0) {
+            RedEnergy de = new RedEnergy(tileMap);
+            de.setType(RedEnergy.GRAVITY);
+            de.setPosition(x, y);
+            int dir = Math.random() < 0.5 ? 1 : -1;
+            de.setVector(dir, 0);
+            enemies.add(de);
+        }
+        if(stepCount == 559) {
+            step++;
+            stepCount = 0;
+            right = left = false;
+        }
+    }
+
+    private void handleFloorSweep() {
+        stepCount++;
+        if(stepCount == 1) {
+            explosions.add(new Explosion(tileMap, (int)x, (int)y));
+            x = -9000;
+            y = 9000;
+            dx = dy = 0;
+        }
+        if(stepCount == 60) {
+            if(player.getx() > (double)tileMap.getWidth() / 2) {
+                x = 30;
+                y = (double)tileMap.getHeight() - 60;
+                dx = 4;
+            }
+            else {
+                x = (double)tileMap.getWidth() - 30;
+                y = (double)tileMap.getHeight() - 60;
+                dx = -4;
+            }
+            explosions.add(new Explosion(tileMap, (int)x, (int)y));
+        }
+        if((dx == -4 && x < 30) || (dx == 4 && x > tileMap.getWidth() - 30)) {
+            stepCount = 0;
+            step++;
+            dx = dy = 0;
+        }
+    }
+
+    private void handleShockwave() {
+        stepCount++;
+        if(stepCount == 1) {
+            x = (double)tileMap.getWidth() / 2;
+            y = 40;
+        }
+        if(stepCount == 60) {
+            dy = 7;
+        }
+        if(y >= tileMap.getHeight() - 30) {
+            dy = 0;
+        }
+        if(stepCount > 60 && stepCount < 120 && stepCount % 5 == 0 && dy == 0) {
+            RedEnergy de = new RedEnergy(tileMap);
+            de.setPosition(x, y);
+            de.setVector(-3, 0);
+            enemies.add(de);
+            de = new RedEnergy(tileMap);
+            de.setPosition(x, y);
+            de.setVector(3, 0);
+            enemies.add(de);
+        }
+        if(stepCount == 120) {
+            stepCount = 0;
+            step++;
+        }
+    }
+
+    private void handleAttacks() {
+        // fly around dropping bombs
+        if(steps[step] == 0) {
+            handleFlyBombing();
+        }
+        // floor sweep
+        else if(steps[step] == 1) {
+            handleFloorSweep();
+
+        }
+        // shockwave
+        else if(steps[step] == 2) {
+            handleShockwave();
+        }
+
+    }
+
 	@Override
 	public void update() {
 		
 		if(health == 0) return;
-		
-		// restart attack pattern
-		if(step == steps.length) {
-			step = 0;
-		}
-		
-		ticks++;
-		
-		if(flinching) {
-			flinchCount++;
-			if(flinchCount == 8) flinching = false;
-		}
-		
-		x += dx;
-		y += dy;
-		
-		animation.update();
-		
-		if(!active) return;
+
+		restartAttackPattern();
 		
 		////////////
 		// special
 		////////////
-		if(health <= maxHealth / 2) {
-			if(shield[0] == null) {
-				shield[0] = new RedEnergy(tileMap);
-				shield[0].setPermanent(true);
-				enemies.add(shield[0]);
-			}
-			if(shield[1] == null) {
-				shield[1] = new RedEnergy(tileMap);
-				shield[0].setPermanent(true);
-				enemies.add(shield[1]);
-			}
-			double pos = ticks / 32;
-			shield[0].setPosition(x + 30 * Math.sin(pos), y + 30 * Math.cos(pos));
-			pos += 3.1415;
-			shield[1].setPosition(x + 30 * Math.sin(pos), y + 30 * Math.cos(pos));
-		}
-		
-		if(!finalAttack && health <= maxHealth / 4) {
-			stepCount = 0;
-			finalAttack = true;
-		}
-		
-		if(finalAttack) {
-			stepCount++;
-			if(stepCount == 1) {
-				explosions.add(new Explosion(tileMap, (int)x, (int)y));
-				x = -9000;
-				y = 9000;
-				dx = dy = 0;
-			}
-			if(stepCount == 60) {
-				x = (double)tileMap.getWidth() / 2;
-				y = (double)tileMap.getHeight() / 2;
-				explosions.add(new Explosion(tileMap, (int)x, (int)y));
-			}
-			if(stepCount >= 90 && stepCount % 30 == 0) {
-				RedEnergy de = new RedEnergy(tileMap);
-				de.setPosition(x, y);
-				de.setVector(3 * Math.sin((double)stepCount / 32), 3 * Math.cos((double)stepCount / 32));
-				de.setType(RedEnergy.BOUNCE);
-				enemies.add(de);
-			}
-			return;
-		}
+        handleSpecial();
+
 		
 		////////////
 		// attacks
 		////////////
-		
-		// fly around dropping bombs
-		if(steps[step] == 0) {
-			stepCount++;
-			if(y > 60) {
-				dy = -4;
-			}
-			if(y < 60) {
-				dy = 0;
-				y = 60;
-				dx = -1;
-			}
-			if(y == 60) {
-				if(dx == -1 && x < 60) {
-					dx = 1;
-				}
-				if(dx == 1 && x > tileMap.getWidth() - 60) {
-					dx = -1;
-				}
-			}
-			if(stepCount % 60 == 0) {
-				RedEnergy de = new RedEnergy(tileMap);
-				de.setType(RedEnergy.GRAVITY);
-				de.setPosition(x, y);
-				int dir = Math.random() < 0.5 ? 1 : -1;
-				de.setVector(dir, 0);
-				enemies.add(de);
-			}
-			if(stepCount == 559) {
-				step++;
-				stepCount = 0;
-				right = left = false;
-			}
-		}
-		// floor sweep
-		else if(steps[step] == 1) {
-			stepCount++;
-			if(stepCount == 1) {
-				explosions.add(new Explosion(tileMap, (int)x, (int)y));
-				x = -9000;
-				y = 9000;
-				dx = dy = 0;
-			}
-			if(stepCount == 60) {
-				if(player.getx() > (double)tileMap.getWidth() / 2) {
-					x = 30;
-					y = (double)tileMap.getHeight() - 60;
-					dx = 4;
-				}
-				else {
-					x = (double)tileMap.getWidth() - 30;
-					y = (double)tileMap.getHeight() - 60;
-					dx = -4;
-				}
-				explosions.add(new Explosion(tileMap, (int)x, (int)y));
-			}
-			if((dx == -4 && x < 30) || (dx == 4 && x > tileMap.getWidth() - 30)) {
-				stepCount = 0;
-				step++;
-				dx = dy = 0;
-			}
+		handleAttacks();
 
-		}
-		// shockwave
-		else if(steps[step] == 2) {
-			stepCount++;
-			if(stepCount == 1) {
-				x = (double)tileMap.getWidth() / 2;
-				y = 40;
-			}
-			if(stepCount == 60) {
-				dy = 7;
-			}
-			if(y >= tileMap.getHeight() - 30) {
-				dy = 0;
-			}
-			if(stepCount > 60 && stepCount < 120 && stepCount % 5 == 0 && dy == 0) {
-				RedEnergy de = new RedEnergy(tileMap);
-				de.setPosition(x, y);
-				de.setVector(-3, 0);
-				enemies.add(de);
-				de = new RedEnergy(tileMap);
-				de.setPosition(x, y);
-				de.setVector(3, 0);
-				enemies.add(de);
-			}
-			if(stepCount == 120) {
-				stepCount = 0;
-				step++;
-			}
-		}
-		
 	}
 
 	@Override

@@ -272,29 +272,18 @@ public class Player extends MapObject {
 		left = right = up = down = flinching = 
 			dashing = jumping = attacking = upattacking = charging = false;
 	}
-	
-	private void getNextPosition() {
-		
-		if(knockback) {
-			dy += fallSpeed * 2;
-			if(!falling) knockback = false;
-			return;
-		}
-		
-		double maxSpeed = this.maxSpeed;
-		if(dashing) maxSpeed *= 1.75;
-		
-		// movement
+
+	private void setMovementPosition() {
 		if(left) {
-			dx -= moveSpeed;
-			if(dx < -maxSpeed) {
-				dx = -maxSpeed;
+			dx -= tempSpeed;
+			if(dx < -tempSpeed) {
+				dx = -tempSpeed;
 			}
 		}
 		else if(right) {
-			dx += moveSpeed;
-			if(dx > maxSpeed) {
-				dx = maxSpeed;
+			dx += tempSpeed;
+			if(dx > tempSpeed) {
+				dx = tempSpeed;
 			}
 		}
 		else {
@@ -311,50 +300,87 @@ public class Player extends MapObject {
 				}
 			}
 		}
+	}
+
+	private void setNoMoveOnAttackPosition() {
+        if((attacking || upattacking || charging) &&
+                !(jumping || falling)) {
+            dx = 0;
+        }
+    }
+
+    private void setChargingPosition() {
+        if(charging) {
+            chargingTick++;
+            if(facingRight) dx = tempSpeed * (3 - chargingTick * 0.07);
+            else dx = -tempSpeed * (3 - chargingTick * 0.07);
+        }
+    }
+
+    private void setJumpingPosition() {
+        if(jumping && !falling) {
+            dy = jumpStart;
+            falling = true;
+            JukeBox.play("playerjump");
+        }
+    }
+
+    private void handleDoubleJump() {
+        if(doubleJump) {
+            dy = doubleJumpStart;
+            alreadyDoubleJump = true;
+            doubleJump = false;
+            JukeBox.play("playerjump");
+            for(int i = 0; i < 6; i++) {
+                energyParticles.add(
+                        new EnergyParticle(
+                                tileMap,
+                                x,
+                                y + (double)cheight / 4,
+                                EnergyParticle.DIR_DOWN));
+            }
+        }
+
+        if(!falling) alreadyDoubleJump = false;
+    }
+
+    private void handleFalling() {
+        if(falling) {
+            dy += fallSpeed;
+            if(dy < 0 && !jumping) dy += stopJumpSpeed;
+            if(dy > maxFallSpeed) dy = maxFallSpeed;
+        }
+    }
+
+	private void getNextPosition() {
+		
+		if(knockback) {
+			dy += fallSpeed * 2;
+			if(!falling) knockback = false;
+			return;
+		}
+		
+		tempSpeed = this.maxSpeed;
+		if(dashing) tempSpeed *= 1.75;
+		
+		// movement
+		setMovementPosition();
+
 		
 		// cannot move while attacking, except in air
-		if((attacking || upattacking || charging) &&
-			!(jumping || falling)) {
-			dx = 0;
-		}
+		setNoMoveOnAttackPosition();
 		
 		// charging
-		if(charging) {
-			chargingTick++;
-			if(facingRight) dx = moveSpeed * (3 - chargingTick * 0.07);
-			else dx = -moveSpeed * (3 - chargingTick * 0.07);
-		}
-		
+		setChargingPosition();
+
 		// jumping
-		if(jumping && !falling) {
-			dy = jumpStart;
-			falling = true;
-			JukeBox.play("playerjump");
-		}
+		setJumpingPosition();
 		
-		if(doubleJump) {
-			dy = doubleJumpStart;
-			alreadyDoubleJump = true;
-			doubleJump = false;
-			JukeBox.play("playerjump");
-			for(int i = 0; i < 6; i++) {
-				energyParticles.add(
-					new EnergyParticle(
-						tileMap,
-						x,
-						y + (double)cheight / 4,
-						EnergyParticle.DIR_DOWN));
-			}
-		}
-		
-		if(!falling) alreadyDoubleJump = false;
+		// double jump
+        handleDoubleJump();
 		
 		// falling
-		if(falling) {
-			dy += fallSpeed;
-			if(dy < 0 && !jumping) dy += stopJumpSpeed;
-			if(dy > maxFallSpeed) dy = maxFallSpeed;
-		}
+		handleFalling();
 		
 	}
 	
@@ -368,107 +394,116 @@ public class Player extends MapObject {
 		width = FRAMEWIDTHS[currentAction];
 		height = FRAMEHEIGHTS[currentAction];
 	}
-	
-	public void update() {
-		
-		time++;
-		
-		// check teleporting
-		if(teleporting) {
-			energyParticles.add(
-				new EnergyParticle(tileMap, x, y, EnergyParticle.DIR_UP)
-			);
-		}
-		
-		// update position
-		boolean isFalling = falling;
-		getNextPosition();
-		checkTileMapCollision();
-		setPosition(xtemp, ytemp);
-		if(isFalling && !falling) {
-			JukeBox.play("playerlands");
-		}
-		if(dx == 0) x = (int)x;
-		
-		// check done flinching
-		if(flinching) {
-			flinchCount++;
-			if(flinchCount > 120) {
-				flinching = false;
-			}
-		}
-		
-		// energy particles
-		for(int i = 0; i < energyParticles.size(); i++) {
-			energyParticles.get(i).update();
-			if(energyParticles.get(i).shouldRemove()) {
-				energyParticles.remove(i);
-				i--;
-			}
-		}
-		
-		// check attack finished
-		if((currentAction == ANIM_ATTACKING || currentAction == ANIM_UPATTACKING)
+
+	private void checkTeleporting() {
+        // check teleporting
+        if(teleporting) {
+            energyParticles.add(
+                    new EnergyParticle(tileMap, x, y, EnergyParticle.DIR_UP)
+            );
+        }
+    }
+
+    private void updatePosition() {
+        // update position
+        boolean isFalling = falling;
+        getNextPosition();
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
+        if(isFalling && !falling) {
+            JukeBox.play("playerlands");
+        }
+        if(dx == 0) x = (int)x;
+    }
+
+    private void checkDoneFlinching() {
+        // check done flinching
+        if(flinching) {
+            flinchCount++;
+            if(flinchCount > 120) {
+                flinching = false;
+            }
+        }
+    }
+
+    private void updateEnergyParticles() {
+        // energy particles
+        for(int i = 0; i < energyParticles.size(); i++) {
+            energyParticles.get(i).update();
+            if(energyParticles.get(i).shouldRemove()) {
+                energyParticles.remove(i);
+                i--;
+            }
+        }
+    }
+
+    private void checkAttackFinished() {
+        // check attack finished
+        if((currentAction == ANIM_ATTACKING || currentAction == ANIM_UPATTACKING)
                 && animation.hasPlayedOnce()) {
             attacking = false;
             upattacking = false;
-		}
-		if(currentAction == ANIM_CHARGING) {
-			if(animation.hasPlayed(5)) {
-				charging = false;
-			}
-			cr.y = (int)y - 20;
-			if(facingRight) cr.x = (int)x - 15;
-			else cr.x = (int)x - 35;
-			if(facingRight)
-				energyParticles.add(
-					new EnergyParticle(
-						tileMap,
-						x + 30,
-						y,
-						EnergyParticle.DIR_RIGHT));
-			else
-				energyParticles.add(
-					new EnergyParticle(
-						tileMap,
-						x - 30,
-						y,
-						EnergyParticle.DIR_LEFT));
-		}
-		
-		// check enemy interaction
-		for(int i = 0; i < enemies.size(); i++) {
-			
-			Enemy e = enemies.get(i);
-			
-			// check attack
-			if(currentAction == ANIM_ATTACKING && animation.getFrame() == 3
+        }
+        if(currentAction == ANIM_CHARGING) {
+            if(animation.hasPlayed(5)) {
+                charging = false;
+            }
+            cr.y = (int)y - 20;
+            if(facingRight) cr.x = (int)x - 15;
+            else cr.x = (int)x - 35;
+            if(facingRight)
+                energyParticles.add(
+                        new EnergyParticle(
+                                tileMap,
+                                x + 30,
+                                y,
+                                EnergyParticle.DIR_RIGHT));
+            else
+                energyParticles.add(
+                        new EnergyParticle(
+                                tileMap,
+                                x - 30,
+                                y,
+                                EnergyParticle.DIR_LEFT));
+        }
+    }
+
+    private void checkEnemyInteraction() {
+        // check enemy interaction
+        for(int i = 0; i < enemies.size(); i++) {
+
+            Enemy e = enemies.get(i);
+
+            // check attack
+            if(currentAction == ANIM_ATTACKING && animation.getFrame() == 3
                     && animation.getCount() == 0 && e.intersects(ar)) {
                 e.hit(damage);
-			}
-			
-			// check upward attack
-			if(currentAction == ANIM_UPATTACKING && animation.getFrame() == 3
+            }
+
+            // check upward attack
+            if(currentAction == ANIM_UPATTACKING && animation.getFrame() == 3
                     && animation.getCount() == 0 && e.intersects(aur)) {
                 e.hit(damage);
-			}
-			
-			// check charging attack
-			if(currentAction == ANIM_CHARGING && animation.getCount() == 0 && e.intersects(cr)) {
-			    e.hit(chargeDamage);
-			}
-			
-			// collision with enemy
-			if(!e.isDead() && intersects(e) && !charging) {
-				hit(e.getDamage());
-			}
-			
-			if(e.isDead()) {
-				JukeBox.play("explode", 2000);
-			}
-			
-		}
+            }
 
+            // check charging attack
+            if(currentAction == ANIM_CHARGING && animation.getCount() == 0 && e.intersects(cr)) {
+                e.hit(chargeDamage);
+            }
+
+            // collision with enemy
+            if(!e.isDead() && intersects(e) && !charging) {
+                hit(e.getDamage());
+            }
+
+            if(e.isDead()) {
+                JukeBox.play("explode", 2000);
+            }
+
+        }
+    }
+
+    private void setAnimationByPriority() {
         // set animation, ordered by priority
         if(teleporting) {
             setAnimation(ANIM_TELEPORTING);
@@ -546,8 +581,27 @@ public class Player extends MapObject {
         else {
             setAnimation(ANIM_IDLE);
         }
+
+        animation.update();
+    }
+
+	public void update() {
 		
-		animation.update();
+		time++;
+
+		checkTeleporting();
+
+		updatePosition();
+		
+		checkDoneFlinching();
+		
+		updateEnergyParticles();
+		
+		checkAttackFinished();
+		
+		checkEnemyInteraction();
+
+        setAnimationByPriority();
 		
 		// set direction
 		if(!attacking && !upattacking && !charging && !knockback) {

@@ -62,6 +62,7 @@ public abstract class MapObject {
 	// movement attributes
 	protected double moveSpeed;
 	protected double maxSpeed;
+	protected double tempSpeed;
 	protected double stopSpeed;
 	protected double fallSpeed;
 	protected double maxFallSpeed;
@@ -139,27 +140,12 @@ public abstract class MapObject {
 		calculateCorners(x, ydest);
 		ytemp += dy;
 
-		if(dy < 0 && (topLeft || topRight)) {
-			dy = 0;
-			ytemp = currRow * tileSize + (double)cheight / 2;
-		}
-		if(dy > 0 && (bottomLeft || bottomRight)) {
-			dy = 0;
-			falling = false;
-			ytemp = (currRow + 1) * tileSize - (double)cheight / 2;
-		}
+		setYtemp();
 		
 		calculateCorners(xdest, y);
 		xtemp += dx;
 
-		if(dx < 0 && (topLeft || bottomLeft)) {
-			dx = 0;
-			xtemp = currCol * tileSize + (double)cwidth / 2;
-		}
-		if(dx > 0 && (topRight || bottomRight)) {
-			dx = 0;
-			xtemp = (currCol + 1) * tileSize - (double)cwidth / 2;
-		}
+		setXtemp();
 		
 		if(!falling) {
 			calculateCorners(x, ydest + 1);
@@ -169,6 +155,29 @@ public abstract class MapObject {
 		}
 		
 	}
+
+	private void setYtemp() {
+        if(dy < 0 && (topLeft || topRight)) {
+            dy = 0;
+            ytemp = currRow * tileSize + (double)cheight / 2;
+        }
+        if(dy > 0 && (bottomLeft || bottomRight)) {
+            dy = 0;
+            falling = false;
+            ytemp = (currRow + 1) * tileSize - (double)cheight / 2;
+        }
+    }
+
+    private void setXtemp() {
+        if(dx < 0 && (topLeft || bottomLeft)) {
+            dx = 0;
+            xtemp = currCol * tileSize + (double)cwidth / 2;
+        }
+        if(dx > 0 && (topRight || bottomRight)) {
+            dx = 0;
+            xtemp = (currCol + 1) * tileSize - (double)cwidth / 2;
+        }
+    }
 	
 	public int getx() { return (int)x; }
 	public int gety() { return (int)y; }
