@@ -2,13 +2,9 @@ package al.artofsoul.batbatgame.gamestate;
 
 import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.handlers.Keys;
-import al.artofsoul.batbatgame.main.Game;
-import al.artofsoul.batbatgame.main.GamePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * @author ArtOfSoul

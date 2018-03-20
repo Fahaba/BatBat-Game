@@ -14,8 +14,6 @@ import al.artofsoul.batbatgame.main.GamePanel;
 
 public class PauseState extends GameState {
 	
-	private Font font;
-	
 	public PauseState(GameStateManager gsm) {
 		
 		super(gsm);

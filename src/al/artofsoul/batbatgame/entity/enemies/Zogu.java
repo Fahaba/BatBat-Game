@@ -12,7 +12,9 @@ import al.artofsoul.batbatgame.tilemap.TileMap;
  */
 
 public class Zogu extends Enemy {
-	
+
+	private static final BufferedImage[][] ZOGU = Content.load("/Sprites/Enemies/ZOGU.gif", 39, 20);
+
 	private BufferedImage[] idleSprites;
 	
 	private int tick;
@@ -27,7 +29,7 @@ public class Zogu extends Enemy {
 		setDimension(39, 20, 25, 15);
 		setEntityStats(1, 5, 0, 0);
 		
-		idleSprites = Content.ZOGU[0];
+		idleSprites = ZOGU[0];
         setAnim(idleSprites, 4);
 		
 		tick = 0;

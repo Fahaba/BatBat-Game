@@ -13,7 +13,9 @@ import al.artofsoul.batbatgame.tilemap.TileMap;
  */
 
 public class Explosion extends MapObject {
-	
+
+	private static final BufferedImage[][] EXPLOSION = Content.load("/Sprites/Enemies/ExplosionRed.gif", 30, 30);
+
 	private BufferedImage[] sprites;
 	
 	private boolean remove;
@@ -35,7 +37,7 @@ public class Explosion extends MapObject {
 		speed = 2;
 		diagSpeed = 1.41;
 		
-		sprites = Content.EXPLOSION[0];
+		sprites = EXPLOSION[0];
 		
 		animation.setFrames(sprites);
 		animation.setDelay(6);

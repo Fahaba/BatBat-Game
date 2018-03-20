@@ -13,6 +13,8 @@ import al.artofsoul.batbatgame.tilemap.TileMap;
 
 public class RedEnergy extends Enemy {
 
+    private static final BufferedImage[][] REDENERGY = Content.load("/Sprites/Enemies/REDENERGY.gif", 20, 20);
+
     private BufferedImage[] startSprites;
     private BufferedImage[] sprites;
 
@@ -34,8 +36,8 @@ public class RedEnergy extends Enemy {
         setDimension(20, 20, 12, 12);
         setEntityStats(1, 5, 0, 0);
 
-        startSprites = Content.REDENERGY[0];
-        sprites = Content.REDENERGY[1];
+        startSprites = REDENERGY[0];
+        sprites = REDENERGY[1];
         setAnim(startSprites, 2);
 
         start = true;

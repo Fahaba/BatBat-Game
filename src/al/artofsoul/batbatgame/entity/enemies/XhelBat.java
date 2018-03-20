@@ -14,7 +14,9 @@ import al.artofsoul.batbatgame.tilemap.TileMap;
  */
 
 public class XhelBat extends Enemy {
-	
+
+	private static final BufferedImage[][] XHELBAT = Content.load("/Sprites/Enemies/XHELBAT.gif", 25, 25);
+
 	private BufferedImage[] sprites;
 	private Player player;
 	private boolean active;
@@ -29,7 +31,7 @@ public class XhelBat extends Enemy {
 		setEntityStats(1, 0.8, 0.15, 4.0);
 
 		jumpStart = -5;
-		sprites = Content.XHELBAT[0];
+		sprites = XHELBAT[0];
 		setAnim(sprites, 4);
 		
 		left = true;

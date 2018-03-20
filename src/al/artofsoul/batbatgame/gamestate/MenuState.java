@@ -3,12 +3,7 @@ package al.artofsoul.batbatgame.gamestate;
 import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.PlayerSave;
 import al.artofsoul.batbatgame.handlers.Keys;
-import al.artofsoul.batbatgame.main.Game;
-import al.artofsoul.batbatgame.main.GamePanel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * @author ArtOfSoul
@@ -60,7 +55,7 @@ public class MenuState extends GameState {
 		case 0:
 			JukeBox.play(MENUSELECTFX);
 			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL4STATE); /// start this level entrance
+			gsm.setState(GameStateManager.LEVEL1STATE); /// start this level entrance
             break;
 		case 1:
 			gsm.setState(GameStateManager.OPTIONSSTATE);

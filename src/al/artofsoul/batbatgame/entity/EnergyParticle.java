@@ -11,7 +11,10 @@ import al.artofsoul.batbatgame.tilemap.TileMap;
  */
 
 public class EnergyParticle extends MapObject {
-	
+
+	private static final BufferedImage[][] ENERGYPARTICLE = Content.load("/Sprites/Player/ENERGYPARTICLE.gif", 5, 5);
+
+
 	private int count;
 	private boolean remove;
 	
@@ -49,7 +52,7 @@ public class EnergyParticle extends MapObject {
 		}
 		
 		count = 0;
-		sprites = Content.ENERGYPARTICLE[0];
+		sprites = ENERGYPARTICLE[0];
 		animation.setFrames(sprites);
 		animation.setDelay(-1);
 	}

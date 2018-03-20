@@ -49,7 +49,8 @@ public class AcidState extends GameState {
 		if(hue > 1) hue = 0;
 		angle += 0.1;
 	}
-	
+
+	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(color);
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);

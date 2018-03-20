@@ -2,9 +2,6 @@ package al.artofsoul.batbatgame.gamestate;
 
 import al.artofsoul.batbatgame.audio.JukeBox;
 import al.artofsoul.batbatgame.entity.*;
-import al.artofsoul.batbatgame.entity.enemies.Ufo;
-import al.artofsoul.batbatgame.entity.enemies.XhelBat;
-import al.artofsoul.batbatgame.entity.enemies.Zogu;
 import al.artofsoul.batbatgame.main.GamePanel;
 
 import java.awt.*;
