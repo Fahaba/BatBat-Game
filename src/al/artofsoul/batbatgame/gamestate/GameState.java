@@ -84,6 +84,14 @@ public abstract class GameState {
 
     private int level;
 
+    // menu
+    protected BufferedImage bg;
+    protected BufferedImage head;
+    protected int currentChoice = 0;
+
+    protected Font font;
+    protected Font font2;
+
     public GameState(GameStateManager gsm, int level) {
 		this.gsm = gsm;
 		this.level = level;
@@ -94,6 +102,26 @@ public abstract class GameState {
 
     public GameState(GameStateManager gsm) {
         this.gsm = gsm;
+
+        try {
+
+            bg = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/sfondi.gif")).getSubimage(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+
+            // load floating head
+            head = ImageIO.read(getClass().getResourceAsStream("/HUD/Hud.gif")).getSubimage(0, 12, 12, 11);
+
+            // titles and fonts
+
+            font = new Font("Arial", Font.BOLD, 11);
+            font2 = new Font("Arial", Font.PLAIN, 9);
+
+            // load sound fx
+            JukeBox.load("/SFX/menuoption.mp3", MENUOPTIONFX);
+            JukeBox.load("/SFX/menuselect.mp3", MENUSELECTFX);
+
+        } catch (Exception e) {
+            Game.LOGGER.log(e.getMessage());
+        }
     }
 
 	public void init(int level){

@@ -19,7 +19,6 @@ public class PauseState extends GameState {
 	public PauseState(GameStateManager gsm) {
 		
 		super(gsm);
-		
 		// fonts
 		font = new Font("Arial", Font.PLAIN, 12);
 		

@@ -17,40 +17,14 @@ import java.awt.image.BufferedImage;
 public class OptionsState extends GameState {
 
     final ImageIcon howTo = new ImageIcon(getClass().getResource("/Backgrounds/howTo.gif"));
-    private BufferedImage bg;
-    private BufferedImage head;
-    private int currentChoice = 0;
+
     private String[] options = {
             "HowTo Play",
             "Back"
     };
 
-    private Font font;
-    private Font font2;
-
     public OptionsState(GameStateManager gsm) {
-
         super(gsm);
-
-        try {
-
-            bg = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/sfondi.gif")).getSubimage(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-
-            // load floating head
-            head = ImageIO.read(getClass().getResourceAsStream("/HUD/Hud.gif")).getSubimage(0, 12, 12, 11);
-
-            // titles and fonts
-
-            font = new Font("Arial", Font.BOLD, 11);
-            font2 = new Font("Arial", Font.PLAIN, 9);
-
-            // load sound fx
-            JukeBox.load("/SFX/menuoption.mp3", MENUOPTIONFX);
-            JukeBox.load("/SFX/menuselect.mp3", MENUSELECTFX);
-
-        } catch (Exception e) {
-            Game.LOGGER.log(e.getMessage());
-        }
     }
 
     public void init() {
